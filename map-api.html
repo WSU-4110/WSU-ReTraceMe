@@ -57,12 +57,15 @@
       tt.setProductInfo("ReTrace Me", "1")
       var WSU = { lat: 42.357384, lng: -83.069739};
       tt.map({
-        key: "sYqgATAE9Ve8gOVWIqazETJQRDI9A8Me",
+        key: "<Your API Key Here>",
         container: "map",
         center: WSU,
         zoom: 16.5
       });
 
+      var marker = new tt.Marker().setLngLat(WSU).addTo(map);
+      var popup = new tt.Popup({anchor:'top'}).setText('Wayne State University Campus');
+      marker.setPopup(popup).togglePopup();
     </script>
 
   </body>
