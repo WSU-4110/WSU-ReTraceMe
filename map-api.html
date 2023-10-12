@@ -12,7 +12,7 @@
 
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
     <!-- Replace version in the URL with desired library version -->
-    <link rel="stylesheet" type="text/css" href=href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps.css"/>
+    <link rel="stylesheet" type="text/css" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps.css"/>
 
     <style>
       #map {width: 100vw; height: 100vh;}
@@ -29,14 +29,17 @@
   <script>
       tt.setProductInfo("ReTrace Me", "1")
       var WSU = { lat: 42.357384, lng: -83.069739};
-      tt.map({
-        key: "<API KEY>",
+      var map = tt.map({
+          key: "<Your API key here>",
         container: "map",
         center: WSU,
         zoom: 16.5
       })
-      map.on('load', () =>{
-        new tt.Marker().setLngLat(WSU).addTo(map)
+
+      map.on('click', function (event) {
+          var lngLat = new tt.LngLat(event.lngLat.lng, event.lngLat.lat)
+          var marker = new tt.Marker().setLngLat(lngLat).addTo(map)
+          console.log(lngLat)
       })
     </script>
 </html>
