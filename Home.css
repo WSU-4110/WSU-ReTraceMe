@@ -36,8 +36,9 @@
 }
 
 .dropbtn:hover, .dropbtn:focus {
-    background-color: #565656;
-    border-radius: 50%;
+    transition:background-color 250ms ease-out 100ms;
+    background: #565656;
+    border-radius: 5px;
 }
 
 .dropdown {
