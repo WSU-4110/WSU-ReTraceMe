@@ -11,12 +11,18 @@
              'opsz' 24
  }
 .menu-header{
-    background-color: coral;
+    background-color: #bf50ff;
     height:59px;
     border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
 
-
+.center-text{
+    text-align: center;
+}
 .dropbtn {
     background-color: transparent;
     outline-color: transparent;
@@ -24,10 +30,14 @@
     font-size: 16px;
     border: none;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: left;
 }
 
 .dropbtn:hover, .dropbtn:focus {
-    background-color: #2980B9;
+    background-color: #565656;
+    border-radius: 50%;
 }
 
 .dropdown {
