@@ -2,7 +2,7 @@
 
 <html class="use-all-space">
 
-  <head>
+<head>
 
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 
@@ -10,36 +10,38 @@
 
     <title>My Map</title>
 
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
     <!-- Replace version in the URL with desired library version -->
-    <link rel="stylesheet" type="text/css" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps.css"/>
+    <link rel="stylesheet" type="text/css" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps.css" />
 
     <style>
-      #map {width: 100vw; height: 100vh;}
+        #map {
+            width: 100vw;
+            height: 100vh;
+        }
     </style>
 
-  </head>
+</head>
 
-  <body>
+<body>
+    <a onclick="removeMarker();" href="javascript:void(0);">Remove last Waypoint</a> |
+    <a onclick="addMarker();" href="javascript:void(0);">Add a Waypoint</a> |
+    <a onclick="removeAllMarkers();" href="javascript:void(0);">Remove All Waypoints</a>
+
     <div id="map" class="map"></div>
-    <!-- Replace version in the URL with desired library version -->
-    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps-web.min.js"></script>
-  </body>
 
-  <script>
-      tt.setProductInfo("ReTrace Me", "1")
-      var WSU = { lat: 42.357384, lng: -83.069739};
-      var map = tt.map({
-          key: "<Your API key here>",
+    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps-web.min.js"></script>
+    <script src="markerFunctions.js"></script>
+</body>
+
+<script>
+    tt.setProductInfo("ReTrace Me", "1")
+    var WSU = { lat: 42.357384, lng: -83.069739 };
+    var map = tt.map({
+        key: "",
         container: "map",
         center: WSU,
         zoom: 16.5
-      })
-
-      map.on('click', function (event) {
-          var lngLat = new tt.LngLat(event.lngLat.lng, event.lngLat.lat)
-          var marker = new tt.Marker().setLngLat(lngLat).addTo(map)
-          console.log(lngLat)
-      })
-    </script>
+    })
+</script>
 </html>
