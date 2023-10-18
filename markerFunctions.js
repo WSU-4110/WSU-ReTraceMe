@@ -6,6 +6,9 @@ function addMarker() {
         var lngLat = new tt.LngLat(event.lngLat.lng, event.lngLat.lat)
         var newMarker = new tt.Marker().setLngLat(lngLat).addTo(map)
         markers.set(createKey(newMarker), newMarker)
+        
+        var popup = new tt.Popup({offset: 25}).setText('Lng: ' + lngLat.lng + '      Lat: ' + lngLat.lat);        
+        newMarker.setPopup(popup);
 
         newMarker.getElement().addEventListener('click', function() {
            lastClickedMarker = newMarker;
