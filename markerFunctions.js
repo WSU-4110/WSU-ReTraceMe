@@ -14,31 +14,34 @@ function addMarker() {
            lastClickedMarker = newMarker;
         });
 
-        console.log(lngLat)
+        console.log("Marker placed at " + lngLat)
     })
 }
 
-
 function createKey(newMarker){
     var coords = newMarker.getLngLat()
-    var key = coords.lng + coords.lat + "";
+    var key = coords.lng + " " + coords.lat;
     return key
 }
 
 function removeMarker() {
     if(lastClickedMarker){
         var key = createKey(lastClickedMarker);
+        var coords = lastClickedMarker.getLngLat()
+
         lastClickedMarker.remove();
         markers.delete(key);
         lastClickedMarker = null;
+
+        console.log("Marker removed at " + coords)
     }
 }
-
-
 
 function removeAllMarkers() {
     for (let [key, marker] of markers) {
             marker.remove();
             markers.delete(key);
     }
+
+    console.log("All markers removed.")
 }
