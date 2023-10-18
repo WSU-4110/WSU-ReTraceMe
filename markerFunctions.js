@@ -1,4 +1,5 @@
 var markers = new Map();
+var lastClickedMarker = null;
 
 function addMarker() {
     map.once('click', function (event) {
@@ -7,7 +8,7 @@ function addMarker() {
         markers.set(createKey(newMarker), newMarker)
 
         newMarker.getElement().addEventListener('click', function() {
-            removeMarker(newMarker);
+           lastClickedMarker = newMarker;
         });
 
         console.log(lngLat)
@@ -21,10 +22,13 @@ function createKey(newMarker){
     return key
 }
 
-function removeMarker(marker) {
-    var key = createKey(marker);
-    marker.remove();
-    markers.delete(key);
+function removeMarker() {
+    if(lastClickedMarker){
+        var key = createKey(lastClickedMarker);
+        lastClickedMarker.remove();
+        markers.delete(key);
+        lastClickedMarker = null;
+    }
 }
 
 
