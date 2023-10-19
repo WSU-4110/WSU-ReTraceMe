@@ -11,14 +11,14 @@ function placeMarker(lngLat) {
     newMarker.getElement().addEventListener('click', function () {
         lastClickedMarker = newMarker
     });
+
+    console.log("Marker placed at " + lngLat)
 }
 
 function userPlaceMarker() {
     map.once('click', function (event) {
         var lngLat = new tt.LngLat(event.lngLat.lng, event.lngLat.lat)
         placeMarker(lngLat)
-        
-        console.log("Marker placed at " + lngLat)
     })
 }
 
