@@ -26,12 +26,14 @@
 <body>
     <a onclick="removeMarker();" href="javascript:void(0);">Remove a Waypoint</a> |
     <a onclick="userPlaceMarker();" href="javascript:void(0);">Add a Waypoint</a> |
-    <a onclick="removeAllMarkers();" href="javascript:void(0);">Remove All Waypoints</a>
+    <a onclick="removeAllMarkers();" href="javascript:void(0);">Remove All Waypoints</a> |
+    <a onclick="getLocation();" href="javascript:void(0);">Get user location</a>
 
     <div id="map" class="map"></div>
 
     <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps-web.min.js"></script>
     <script src="markerFunctions.js"></script>
+    <script src="userLocation.js"></script>
 </body>
 
 <script>
