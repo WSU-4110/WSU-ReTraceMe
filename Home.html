@@ -79,6 +79,8 @@
             popup = new tt.Popup({ anchor: 'top' }).setText('Wayne State University Campus');
             marker.setPopup(popup).togglePopup();
 
+            //Perform Geolocation
+
             var geoLocate = new tt.GeolocateControl({
                 positionOptions: {
                     enableHighAccuracy:true
