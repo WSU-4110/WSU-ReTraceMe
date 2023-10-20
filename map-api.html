@@ -25,9 +25,10 @@
 
 <body>
     <a onclick="removeMarker();" href="javascript:void(0);">Remove a Waypoint</a> |
-    <a onclick="userPlaceMarker();" href="javascript:void(0);">Add a Waypoint</a> |
+    <a onclick="placeMarker();" href="javascript:void(0);">Add a Waypoint</a> |
     <a onclick="removeAllMarkers();" href="javascript:void(0);">Remove All Waypoints</a> |
-    <a onclick="getLocation();" href="javascript:void(0);">Get user location</a>
+    <a onclick="getLocation();" href="javascript:void(0);">Get user location</a> |
+    <a onclick="autoPlaceMarker();" href="javascript:void(0);">Start trip prototype</a>
 
     <div id="map" class="map"></div>
 
@@ -44,6 +45,21 @@
         container: "map",
         center: WSU,
         zoom: 16.5
+    })
+
+    var geoLocate = new tt.GeolocateControl({
+        positionOptions: {
+            enableHighAccuracy: true
+        },
+        fitBoundOptions: {
+            maxZoom: 20
+        }
+    });
+
+    map.addControl(geoLocate);
+
+    map.on('load', function () {
+        geoLocate.trigger();
     })
 </script>
 </html>
