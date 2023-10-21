@@ -14,7 +14,7 @@ function placeMarker() {
         markers.set(createKey(newMarker), newMarker)
 
         //Assign popup to marker add the timestamp
-        var popup = new tt.Popup({ offset: 25 }).setText('Lng: ' + lngLat.lng + '      Lat: ' + lngLat.lat+'<br> Timestamp:'+timeStamp);
+        var popup = new tt.Popup({ offset: 25 }).setText('Lng: ' + lngLat.lng + '      Lat: ' + lngLat.lat+' Timestamp:'+timeStamp);
         newMarker.setPopup(popup)
 
         //Marker listens for click
