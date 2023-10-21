@@ -1,63 +1,139 @@
 var markers = new Map(); // initialize hashmap
 var lastClickedMarker = null;
+var initialLocation = null;
+var lastMarkerTime = null;
 
-//Place marker on map
-function placeMarker() {
-    navigator.geolocation.getCurrentPosition((position) => {
-        var lngLat = new tt.LngLat(position.coords.longitude, position.coords.latitude);
-        var timeStamp = new Date().toLocaleString()//added cirrent timestamp
+//Location Functions
 
-        //Create new instance of marker, update: added the timestamp property
-        var newMarker = new tt.Marker({timeStamp:timeStamp}).setLngLat(lngLat).addTo(map)
+//From ChatGPT
+function calculateDistance(lat1, lon1, lat2, lon2) {
+    const earthRadius = 6371000; // Radius of the Earth in meters
 
-        //Insert marker into hashmap
-        markers.set(createKey(newMarker), newMarker)
+    const degToRad = (degrees) => (degrees * Math.PI) / 180;
+    const dLat = degToRad(lat2 - lat1);
+    const dLon = degToRad(lon2 - lon1);
 
-        //Assign popup to marker add the timestamp
-        var popup = new tt.Popup({ offset: 25 }).setText('Lng: ' + lngLat.lng + '      Lat: ' + lngLat.lat+' Timestamp:'+timeStamp);
-        newMarker.setPopup(popup)
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(degToRad(lat1)) * Math.cos(degToRad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
 
-        //Marker listens for click
-        newMarker.getElement().addEventListener('click', function () {
-            lastClickedMarker = newMarker
-        });
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = earthRadius * c;
 
-        console.log("Marker placed at " + lngLat+"Timestamp: "+timeStamp)
-    });
+    return distance;
 }
 
-//User places marker
-//function userPlaceMarker() {}
+function getLocation(callback) {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var currentLocation = new tt.LngLat(position.coords.longitude, position.coords.latitude);
+            callback(currentLocation);
+        })
+    }
+    else {
+        console.log("Geolocation is not supported by this browser.")
+    }
+}
 
-//Generate key for hash map
-function createKey(newMarker){
-    var coords = newMarker.getLngLat()
+//Utility functions
+
+function createKey(marker) {
+    var coords = getMarkerCoords(marker)
     var key = coords.lng + " " + coords.lat;
     return key
 }
 
-//Remove last clicked marker
+//Marker functions
+
+function placeMarker(currentLocation) {
+    newMarker = createMarker(currentLocation)
+
+    markerClickEvent(newMarker);
+
+    console.log("Marker placed at " + currentLocation)
+}
+
+function autoPlaceMarker(currentLocation) {
+    initialLocation = currentLocation;
+
+    var lastMarkerTime = new Date().getTime();
+    var currentTime;
+    var timeElapsed;
+
+    var distanceTraveled = calculateDistance(initialLocation.lat, initialLocation.lng, currentLocation.lat, currentLocation.lng);
+
+    var interval = 5000;
+
+    console.log("|#|-------------------------|#|");
+    console.log("|#|Begin 5 second time delay|#|");
+    console.log("|#|-------------------------|#|");
+
+    setTimeout(function (currentTime, timeElapsed, lastMarkerTime) {
+        currentTime = new Date().getTime();
+        var timeElapsed = currentTime - lastMarkerTime;
+
+        console.log("timeElapsed = " + timeElapsed / 1000 + " seconds")
+
+        if (distanceTraveled >= 10 || (distanceTraveled < 10 && timeElapsed >= interval)) {
+            placeMarker(currentLocation);
+
+            initialLocation = currentLocation;
+            lastMarkerTime = new Date().getTime();
+        }
+
+        console.log("|#|-----------------------------|#|");
+        console.log("|#|5 second time delay has ended|#|");
+        console.log("|#|-----------------------------|#|");
+
+    }, interval, currentTime, timeElapsed, lastMarkerTime);
+}
+
 function removeMarker() {
-    if(lastClickedMarker){
+    if (lastClickedMarker) {
         var key = createKey(lastClickedMarker);
-        var coords = lastClickedMarker.getLngLat()
+        var coords = getMarkerCoords(lastClickedMarker);
 
-        lastClickedMarker.remove();
-        markers.delete(key);
+        deleteMarker(key, lastClickedMarker)
+
         lastClickedMarker = null;
-        var timeStamp = lastClickedMarker.getProperty('timestamp');
 
-        console.log("Marker removed at " + coords+" remove timestamp"+timeStamp)
+        console.log("Marker removed at " + coords)
     }
 }
 
-//Remove every marker
 function removeAllMarkers() {
     for (let [key, marker] of markers) {
-
-            marker.remove();
-            markers.delete(key);
+        deleteMarker(key, marker)
     }
-
     console.log("All markers removed.")
+}
+
+function createMarker(currentLocation) {
+    var marker = new tt.Marker().setLngLat(currentLocation).addTo(map)
+
+    setMarkerPopup(marker, currentLocation)
+
+    markers.set(createKey(marker), marker)
+
+    return marker;
+}
+
+function markerClickEvent(marker) {
+    marker.getElement().addEventListener('click', function () {
+        lastClickedMarker = marker
+    });
+}
+
+function setMarkerPopup(marker, currentLocation) {
+    var popup = new tt.Popup({ offset: 25 }).setText('Lng: ' + currentLocation.lng + '      Lat: ' + currentLocation.lat);
+    marker.setPopup(popup)
+}
+
+function getMarkerCoords(marker) {
+    return marker.getLngLat()
+}
+
+function deleteMarker(key, marker) {
+    marker.remove();
+    markers.delete(key);
 }
