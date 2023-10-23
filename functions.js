@@ -23,11 +23,11 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
     return distance;
 }
 
-function getLocation(callback) {
+function getUserLocation(callback) {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
-            var currentLocation = new tt.LngLat(position.coords.longitude, position.coords.latitude);
-            callback(currentLocation);
+            var userLocation = new tt.LngLat(position.coords.longitude, position.coords.latitude);
+            callback(userLocation);
         })
     }
     else {
@@ -45,22 +45,22 @@ function createKey(marker) {
 
 //Marker functions
 
-function placeMarker(lngLat) {
+function placeMarker(userLocation) {
     var timestamp = new Date().toLocaleString();
-    newMarker = createMarker(lngLat, timestamp)
+    newMarker = createMarker(userLocation, timestamp)
 
     markerClickEvent(newMarker);
-    console.log(`Marker placed at ${lngLat} with timestamp: ${timestamp}`);
+    console.log(`Marker placed at ${userLocation} with timestamp: ${timestamp}`);
 }
 
-function autoPlaceMarker(currentLocation) {
-    initialLocation = currentLocation;
+function autoPlaceMarker(userLocation) {
+    initialLocation = userLocation;
 
     var lastMarkerTime = new Date().getTime();
     var currentTime;
     var timeElapsed;
 
-    var distanceTraveled = calculateDistance(initialLocation.lat, initialLocation.lng, currentLocation.lat, currentLocation.lng);
+    var distanceTraveled;
 
     var interval = 5000;
 
@@ -70,12 +70,14 @@ function autoPlaceMarker(currentLocation) {
 
     setTimeout(function (currentTime, timeElapsed, lastMarkerTime) {
         currentTime = new Date().getTime();
-        var timeElapsed = currentTime - lastMarkerTime;
+        var currentLocation = userLocation;
+        timeElapsed = currentTime - lastMarkerTime;
+        distanceTraveled = calculateDistance(initialLocation.lat, initialLocation.lng, currentLocation.lat, currentLocation.lng);
 
         console.log("timeElapsed = " + timeElapsed / 1000 + " seconds")
 
         if (distanceTraveled >= 10 || (distanceTraveled < 10 && timeElapsed >= interval)) {
-            placeMarker(currentLocation);
+            placeMarker(userLocation);
 
             initialLocation = currentLocation;
             lastMarkerTime = new Date().getTime();
@@ -110,10 +112,10 @@ function removeAllMarkers() {
     console.log("All markers removed.")
 }
 
-function createMarker(currentLocation, timestamp) {
-    var marker = new tt.Marker({ timestamp: timestamp }).setLngLat(currentLocation).addTo(map)
+function createMarker(coords, timestamp) {
+    var marker = new tt.Marker({ timestamp: timestamp }).setLngLat(coords).addTo(map)
 
-    setMarkerPopup(marker, currentLocation, timestamp)
+    setMarkerPopup(marker, coords, timestamp)
 
     markers.set(createKey(marker), marker)
 
@@ -126,8 +128,8 @@ function markerClickEvent(marker) {
     });
 }
 
-function setMarkerPopup(marker, lngLat, timestamp) {
-    var popup = new tt.Popup({ offset: 25 }).setHTML('Lng: ' + lngLat.lng + ' Lat: ' + lngLat.lat + '<br>Timestamp: ' + timestamp);
+function setMarkerPopup(marker, coords, timestamp) {
+    var popup = new tt.Popup({ offset: 25 }).setHTML('Lng: ' + coords.lng + ' Lat: ' + coords.lat + '<br>Timestamp: ' + timestamp);
     marker.setPopup(popup);
 }
 
