@@ -1,9 +1,10 @@
-var markers = new Map(); // initialize hashmap
+var markers = new Map();
 var lastClickedMarker = null;
-var initialLocation = null;
+var lastMarkerLocation = null;
 var lastMarkerTime = null;
+var endLoop = false;
 
-//Location Functions
+//LOCATION FUNCTIONS
 
 //From ChatGPT
 function calculateDistance(lat1, lon1, lat2, lon2) {
@@ -35,7 +36,7 @@ function getUserLocation(callback) {
     }
 }
 
-//Utility functions
+//UTILITY FUNCTIONS
 
 function createKey(marker) {
     var coords = getMarkerCoords(marker)
@@ -43,7 +44,33 @@ function createKey(marker) {
     return key
 }
 
-//Marker functions
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms)); //from stackoverflow
+}
+
+function loopEnder() {
+    endLoop = true;
+}
+
+//TRIP FUNCTIONS
+
+async function startTrip(userLocation) {
+    lastMarkerTime = new Date().getTime();
+    lastMarkerLocation = userLocation;
+    endLoop = false;
+    const interval = 5000; //5 seconds
+
+    console.log("A trip has been started.");
+
+    while (!endLoop) {
+        await sleep(interval);
+        autoPlaceMarker(userLocation);
+    }
+
+    console.log("The trip has ended.");
+}
+
+//MARKER FUNCTIONS
 
 function placeMarker(userLocation) {
     var timestamp = new Date().toLocaleString();
@@ -54,40 +81,21 @@ function placeMarker(userLocation) {
 }
 
 function autoPlaceMarker(userLocation) {
-    initialLocation = userLocation;
+    const interval = 10000;
+    const initialTime = lastMarkerTime;
+    const currentTime = Date.now();
+    const initialLocation = lastMarkerLocation;
+    const currentLocation = userLocation;
+    const timeElapsed = currentTime - initialTime;
+    const distanceTraveled = calculateDistance(initialLocation.lat, initialLocation.lng, currentLocation.lat, currentLocation.lng);
 
-    var lastMarkerTime = new Date().getTime();
-    var currentTime;
-    var timeElapsed;
+    console.log("timeElapsed = " + timeElapsed / 1000 + " seconds");
 
-    var distanceTraveled;
-
-    var interval = 5000;
-
-    console.log("|#|-------------------------|#|");
-    console.log("|#|Begin 5 second time delay|#|");
-    console.log("|#|-------------------------|#|");
-
-    setTimeout(function (currentTime, timeElapsed, lastMarkerTime) {
-        currentTime = new Date().getTime();
-        var currentLocation = userLocation;
-        timeElapsed = currentTime - lastMarkerTime;
-        distanceTraveled = calculateDistance(initialLocation.lat, initialLocation.lng, currentLocation.lat, currentLocation.lng);
-
-        console.log("timeElapsed = " + timeElapsed / 1000 + " seconds")
-
-        if (distanceTraveled >= 10 || (distanceTraveled < 10 && timeElapsed >= interval)) {
-            placeMarker(userLocation);
-
-            initialLocation = currentLocation;
-            lastMarkerTime = new Date().getTime();
-        }
-
-        console.log("|#|-----------------------------|#|");
-        console.log("|#|5 second time delay has ended|#|");
-        console.log("|#|-----------------------------|#|");
-
-    }, interval, currentTime, timeElapsed, lastMarkerTime);
+    if ((distanceTraveled >= 10 || (distanceTraveled < 10 && timeElapsed >= interval)) && (initialLocation != currentLocation)) {
+        placeMarker(userLocation);
+        lastMarkerTime = Date.now();
+        lastMarkerLocation = userLocation;
+    }
 }
 
 function removeMarker() {
