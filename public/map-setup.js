@@ -29,7 +29,7 @@ map.addControl(geoLocate);
 
 map.on('load', function () {
     geoLocate.trigger();
-    map.on('zoomend', function () {
+    map.once('zoomend', function () {
         map.easeTo({zoom: 17, animate: true, essential: true});
     })
 })
