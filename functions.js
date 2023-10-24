@@ -27,7 +27,7 @@ async function startTrip(userLocation) {
 function placeMarker(userLocation) {
     var timestamp = new Date().toLocaleString();
     newMarker = createMarker(userLocation, timestamp)
-    getUserLocation(storeLocally);
+
     markerClickEvent(newMarker);
     console.log(`Marker placed at ${userLocation} with timestamp: ${timestamp}`);
 }
@@ -45,7 +45,7 @@ function autoPlaceMarker(userLocation) {
     console.log("Distance traveled = " + distanceTraveled + " km");
 
     //if ((distanceTraveled >= 10 || (distanceTraveled < 10 && timeElapsed >= interval)) && (initialLocation != currentLocation)) {
-    if ((distanceTraveled >= 10) || (distanceTraveled < 10 && timeElapsed >= interval)) {
+    if ((distanceTraveled >= 10) || ((distanceTraveled < 10) && (timeElapsed >= 10000))) {
         placeMarker(userLocation);
         lastMarkerTime = Date.now();
         lastMarkerLocation = userLocation;
@@ -133,11 +133,3 @@ function sleep(ms) {
 function loopEnder() {
     endLoop = true;
 }
-
-function storeLocally(userLocation){//store the data locally
-    //get the geolocation
-    localStorage.setItem("latitude", userLocation.lat);
-    localStorage.setItem("longitude", userLocation.lng);
-}
-
-
