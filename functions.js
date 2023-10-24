@@ -39,9 +39,10 @@ function autoPlaceMarker(userLocation) {
     const initialLocation = lastMarkerLocation;
     const currentLocation = userLocation;
     const timeElapsed = currentTime - initialTime;
-    const distanceTraveled = calculateDistance(initialLocation.lat, initialLocation.lng, currentLocation.lat, currentLocation.lng);
+    const distanceTraveled = initialLocation.distanceTo(currentLocation);
 
-    console.log("timeElapsed = " + timeElapsed / 1000 + " seconds");
+    console.log("Time Elapsed = " + timeElapsed / 1000 + " seconds");
+    console.log("Distance traveled = " + distanceTraveled + " km");
 
     if ((distanceTraveled >= 10 || (distanceTraveled < 10 && timeElapsed >= interval)) && (initialLocation != currentLocation)) {
         placeMarker(userLocation);
@@ -103,23 +104,6 @@ function deleteMarker(key, marker) {
 }
 
 //##LOCATION FUNCTIONS##\\
-
-function calculateDistance(lat1, lon1, lat2, lon2) { //from chatgpt
-    const earthRadius = 6371000; 
-
-    const degToRad = (degrees) => (degrees * Math.PI) / 180;
-    const dLat = degToRad(lat2 - lat1);
-    const dLon = degToRad(lon2 - lon1);
-
-    const a =
-        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.cos(degToRad(lat1)) * Math.cos(degToRad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
-
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const distance = earthRadius * c;
-
-    return distance;
-}
 
 function getUserLocation(callback) {
     if (navigator.geolocation) {

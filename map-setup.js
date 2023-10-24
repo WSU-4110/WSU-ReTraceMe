@@ -1,13 +1,11 @@
 var WSU = { lat: 42.357384, lng: -83.069739 };
-
-tt.setProductInfo("ReTrace Me", "1")
+var center;
 
 var map = tt.map({
     key: "wWiYy6VgRhpS4PPvp2RT0aDq7o7MTNAD",
     container: "map",
     center: WSU,
-    zoom: 18,
-    minZoom: 16
+    zoom: 18
 });
 
 const marker = new tt.Marker().setLngLat(WSU).addTo(map);
@@ -31,4 +29,7 @@ map.addControl(geoLocate);
 
 map.on('load', function () {
     geoLocate.trigger();
+    map.on('zoomend', function () {
+        map.easeTo({zoom: 17, animate: true, essential: true});
+    })
 })
