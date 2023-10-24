@@ -23,7 +23,8 @@
                 <span class="material-symbols-outlined">menu</span>
             </button>
             <div id="myDropdown" class="dropdown-content">
-                <a href="#start-trip">Start Trip</a>
+                <a onclick="getUserLocation(startTrip);" href="#start-trip">Start Trip</a>
+                <a onclick="loopEnder();" href="#start-trip">End Trip</a>
                 <a href="#show-console">Show Console</a>
                 <a href="#about">About</a>
             </div>
@@ -59,43 +60,8 @@
 
         <!-- Version 6.25 is up to date as of 10/09/2023 -->
         <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps-web.min.js"></script>
-
-        <script>
-            var WSU = { lat: 42.357384, lng: -83.069739 };
-            var marker;
-            var popup;
-
-            tt.setProductInfo("ReTrace Me", "1")
-
-            var map = tt.map({
-                key: "wWiYy6VgRhpS4PPvp2RT0aDq7o7MTNAD",
-                container: "map",
-                center: WSU,
-                zoom: 18,
-                minZoom: 16
-            });
-
-            marker = new tt.Marker().setLngLat(WSU).addTo(map);
-            popup = new tt.Popup({ anchor: 'top' }).setText('Wayne State University Campus');
-            marker.setPopup(popup).togglePopup();
-
-            //Perform Geolocation
-
-            var geoLocate = new tt.GeolocateControl({
-                positionOptions: {
-                    enableHighAccuracy:true
-                },
-                fitBoundOptions: {
-                    maxZoom:20
-                }
-            });
-
-            map.addControl(geoLocate);
-
-            map.on('load', function () {
-                geoLocate.trigger();
-            })
-        </script>
+        <script src="functions.js"></script>
+        <script src="map-setup.js"></script>
 
     </body>
 

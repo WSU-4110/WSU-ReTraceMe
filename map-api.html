@@ -35,34 +35,8 @@
 
     <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps-web.min.js"></script>
     <script src="functions.js"></script>
+    <script src="map-setup.js"></script>
+
     <!--<script src="userLocation.js"></script> -->
 </body>
-
-<script>
-    tt.setProductInfo("ReTrace Me", "1")
-    var WSU = { lat: 42.357384, lng: -83.069739 };
-    var map = tt.map({
-        key: "gGKQIConiGN0EbLuQbx5EmGVd3AbKsGo",
-        container: "map",
-        center: WSU,
-        zoom: 16.5
-    })
-
-    var geoLocate = new tt.GeolocateControl({
-        positionOptions: {
-            enableHighAccuracy: true
-        },
-        fitBoundOptions: {
-            maxZoom: 20
-        },
-        trackUserLocation: true,
-        showAccuracyCircle: false
-    });
-
-    map.addControl(geoLocate);
-
-    map.on('load', function () {
-        geoLocate.trigger();
-    })
-</script>
 </html>
