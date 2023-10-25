@@ -16,23 +16,30 @@
 
     <body>
         <div id="mySidenav" class="sidenav">
-            <a href="#">About</a>
+            <textarea id="consoleLog" name="consoleLog" rows="20" cols="50"></textarea>
             <a href="#">Services</a>
             <a href="#">Clients</a>
             <a href="#">Contact</a>
           </div>
           
-             <span style="font-size:30px;cursor:pointer" onclick="toggleNav()">&#9776;</span>
+          <span class="hamburger-menu" onclick="toggleNav()">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
           
           
           <script>
              function toggleNav() {
-               var element = document.getElementById("mySidenav");
-               if (element.style.width == "250px") {
-                 element.style.width = "0px";
-               } else {
-                 element.style.width = "250px";
-               }
+                var element = document.getElementById("mySidenav");
+                var hamburgerMenu = document.querySelector(".hamburger-menu");
+                if (element.style.width == "33%") {
+                    element.style.width = "0";
+                    hamburgerMenu.classList.remove("active");
+                } else {
+                    element.style.width = "33%";
+                    hamburgerMenu.classList.add("active");
+                }
              }
           
           </script>

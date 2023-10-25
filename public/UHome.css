@@ -7,9 +7,9 @@ body {
     width: 0;
     position: fixed;
     z-index: 1;
-    top: -100;
+    top: 0;
     left: 0;
-    background-color: #111;
+    background-color: #0c544a;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
@@ -28,22 +28,48 @@ body {
     color: #f1f1f1;
   }
   
-  .sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
+span {
+    font-size: 30px;
+    cursor: pointer;
+    position: relative; 
+    z-index: 2; 
+    }
+  
+@media screen and (max-height: 450px) {
+.sidenav {padding-top: 15px;}
+.sidenav a {font-size: 18px;}
+}
+
+.hamburger-menu {
+    cursor: pointer;
+    display: inline-block;
   }
   
-  span {
-       font-size: 30px;
-       cursor: pointer;
-       position: relative; /* Add this line */
-       z-index: 2; /* Add this line */
-     }
-  
-  @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
+  .hamburger-menu span {
+    display: block;
+    width: 33px;
+    height: 4px;
+    margin-bottom: 5px;
+    background-color: #333;
+    transition: all 0.3s;
   }
+  
+  .hamburger-menu.active span:nth-child(1) {
+    transform: rotate(-45deg) translate(-9px, 6px);
+  }
+  
+  .hamburger-menu.active span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .hamburger-menu.active span:nth-child(3) {
+    transform: rotate(45deg) translate(-8px, -8px);
+  }
+  
+  textarea {
+    margin: 10px 15px 20px 90px;
+  }
+  
+  
+  
+  
