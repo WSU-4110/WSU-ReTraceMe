@@ -14,14 +14,14 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
         <style>
             #map {
-                width: 100vw;
-                height: 100vh;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
             }
 
-            .button a {
-                text-decoration: none;
-                color: white;
-            }
+
         </style>
     </head>
     
@@ -56,8 +56,6 @@
                     <button class="button"><a onclick="removeMarker();" href="javascript:void(0);">Remove Waypoint</a></button> 
                     <button class="button"><a onclick="getUserLocation(placeMarker);" href="javascript:void(0);">Add Waypoint</a></button> 
                     <button class="button"><a onclick="removeAllMarkers();" href="javascript:void(0);">Remove All Waypoints</a></button> 
-                    <button class="button"><a onclick="getUserLocation(startTrip);" href="javascript:void(0);">Start trip</a></button> 
-                    <button class="button"><a onclick="loopEnder();" href="javascript:void(0);">End trip</a></button>
                 </div>
             </div>
         </div>

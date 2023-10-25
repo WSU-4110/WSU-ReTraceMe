@@ -1,7 +1,27 @@
 body {
     font-family: "Lato", sans-serif;
   }
-  
+
+
+.button a {
+    text-decoration: none;
+    color: white;
+}
+
+#banner {
+    display: flex;
+    justify-content: space-around;
+}
+@media screen and (max-width: 600px) {
+    #banner-content {
+        flex-direction: column;
+    }
+}
+@media screen and (min-width: 601px) {
+    #banner-content {
+        flex-direction: row;
+    }
+}
   .sidenav {
     height: 100%;
     width: 0;
@@ -9,7 +29,8 @@ body {
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #0f6356;
+    background-color: #000000;
+    opacity: 0.8;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
@@ -52,7 +73,7 @@ span {
     margin-bottom: 5px;
     margin-top: 4px;
     margin-left: 4px;
-    background-color: #000000;
+    background-color: #b9b9b9;
     transition: all 0.3s;
   }
   
@@ -78,7 +99,7 @@ span {
     position: absolute; 
     top: 0; 
     left: 0; 
-    background-color: #0f6356; 
+    background-color: #242928; 
     width: 100%; 
   }
   div#banner-content { 
@@ -86,23 +107,19 @@ span {
     height: 30px;
     margin: 0 auto; 
     padding: 10px; 
-    
-  }
-  #banner {
-    display: flex;
-    justify-content: space-around;
-  }
-  
+   }
+ 
+
   .btn-group {
     display: flex;
     justify-content: space-around;
   }
   .btn-group .button {
-    background-color: #630f1c; 
+    background-color: #242928; 
     border: none;
     color: white;
-    padding: 15px 15px;
-    margin: 5px;
+    padding: 5px 5px;
+    margin: 3px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
