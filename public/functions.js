@@ -135,10 +135,15 @@ function loopEnder() {
     endLoop = true;
 }
 
-function storeLocally(userLocation){//store the data locally
-    //get the geolocation
+//USER DATA FUNCTIONS
+
+function storeLocally(userLocation) {
     localStorage.setItem("latitude", userLocation.lat);
     localStorage.setItem("longitude", userLocation.lng);
 }
 
+function retrieveLocalData(userLocation) {
+    localStorage.getItem("latitude", userLocation.lat);
+    localStorage.getItem("longitude", userLocation.lng);
+}
 
