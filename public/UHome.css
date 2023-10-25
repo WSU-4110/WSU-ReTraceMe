@@ -9,7 +9,7 @@ body {
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #ffffff;
+    background-color: #0f6356;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
@@ -50,6 +50,8 @@ span {
     width: 33px;
     height: 4px;
     margin-bottom: 5px;
+    margin-top: 4px;
+    margin-left: 4px;
     background-color: #000000;
     transition: all 0.3s;
   }
@@ -69,8 +71,55 @@ span {
   textarea {
     margin: 10px 15px 20px 90px;
     resize: none;
+    
   }
   
+  div#banner { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    background-color: #0f6356; 
+    width: 100%; 
+  }
+  div#banner-content { 
+    width: 800px; 
+    height: 30px;
+    margin: 0 auto; 
+    padding: 10px; 
+    
+  }
+  #banner {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .btn-group {
+    display: flex;
+    justify-content: space-around;
+  }
+  .btn-group .button {
+    background-color: #630f1c; 
+    border: none;
+    color: white;
+    padding: 15px 15px;
+    margin: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    float: left;
+  }
+
+  .btn-group .button:hover {
+    background-color: #632c0f;
+  }
+
+
+
+  
+
+
 
   
   
