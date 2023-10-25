@@ -108,7 +108,6 @@ span {
     margin: 0 auto; 
     padding: 10px; 
    }
- 
 
   .btn-group {
     display: flex;
@@ -129,7 +128,7 @@ span {
   }
 
   .btn-group .button:hover {
-    background-color: #632c0f;
+    background-color: #009688;
   }
 
 
