@@ -16,7 +16,7 @@ async function startTrip(userLocation) {
 
     while (!endLoop) {
         await sleep(interval);
-        autoPlaceMarker(userLocation);
+        getUserLocation(autoPlaceMarker);
     }
 
     console.log("The trip has ended.");
@@ -26,8 +26,10 @@ async function startTrip(userLocation) {
 
 function placeMarker(userLocation) {
     var timestamp = new Date().toLocaleString();
+
     newMarker = createMarker(userLocation, timestamp)
     markerClickEvent(newMarker);
+
     console.log(`Marker placed at ${userLocation} with timestamp: ${timestamp}`);
 }
 
@@ -43,7 +45,8 @@ function autoPlaceMarker(userLocation) {
     console.log("Time Elapsed = " + timeElapsed / 1000 + " seconds");
     console.log("Distance traveled = " + distanceTraveled + " km");
 
-    if ((distanceTraveled >= 10 || (distanceTraveled < 10 && timeElapsed >= interval)) && (initialLocation != currentLocation)) {
+    //if ((distanceTraveled >= 10 || (distanceTraveled < 10 && timeElapsed >= interval)) && (initialLocation != currentLocation)) {
+    if ((distanceTraveled >= 10) || (distanceTraveled < 10 && timeElapsed >= interval)) {
         placeMarker(userLocation);
         lastMarkerTime = Date.now();
         lastMarkerLocation = userLocation;
