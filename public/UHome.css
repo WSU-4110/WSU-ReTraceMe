@@ -9,7 +9,7 @@ body {
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #0c544a;
+    background-color: #ffffff;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
@@ -50,7 +50,7 @@ span {
     width: 33px;
     height: 4px;
     margin-bottom: 5px;
-    background-color: #333;
+    background-color: #000000;
     transition: all 0.3s;
   }
   
@@ -68,8 +68,10 @@ span {
   
   textarea {
     margin: 10px 15px 20px 90px;
+    resize: none;
   }
   
+
   
   
   
