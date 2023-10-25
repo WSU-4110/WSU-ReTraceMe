@@ -16,7 +16,7 @@ async function startTrip(userLocation) {
 
     while (!endLoop) {
         await sleep(interval);
-        autoPlaceMarker(userLocation);
+        getUserLocation(autoPlaceMarker);
     }
 
     console.log("The trip has ended.");
@@ -26,9 +26,10 @@ async function startTrip(userLocation) {
 
 function placeMarker(userLocation) {
     var timestamp = new Date().toLocaleString();
+
     newMarker = createMarker(userLocation, timestamp)
-    getUserLocation(storeLocally);
     markerClickEvent(newMarker);
+
     console.log(`Marker placed at ${userLocation} with timestamp: ${timestamp}`);
 }
 
