@@ -1,16 +1,16 @@
 {
   "name": "Re:TraceMe",
   "short_name": "Re:Trace",
-  "start_url": "index.html",
+  "start_url": "./Uindex.html",
   "scope": "./",
   "icons": [
     {
-      "src": "favicon.png",
+      "src": "images/favicon.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "favicon.png",
+      "src": "images/favicon.png",
       "sizes": "512x512",
       "type": "image/png"
     }
