@@ -26,7 +26,6 @@ async function startTrip(userLocation) {
 
 function placeMarker(userLocation) {
     var timestamp = new Date().toLocaleString();
-
     newMarker = createMarker(userLocation, timestamp)
     markerClickEvent(newMarker);
 
@@ -137,7 +136,7 @@ function loopEnder() {
 
 //USER DATA FUNCTIONS
 
-function storeLocally(userLocation) {
+function storeLocally(userLocation) {//store data locally
     localStorage.setItem("latitude", userLocation.lat);
     localStorage.setItem("longitude", userLocation.lng);
 }
