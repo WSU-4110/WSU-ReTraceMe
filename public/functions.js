@@ -170,4 +170,19 @@ class Subject {
     }
 }
 
+const getUserLocation = new Subject();
 
+getUserLocation.addObserver(userLocation => {
+    // Update the user's location on the map
+    updateMap(userLocation);
+});
+
+getUserLocation.addObserver(userLocation => {
+    // Store the user's location locally
+    storeLocally(userLocation);
+});
+
+// Call this function whenever the user's location changes
+function onUserLocationChange(userLocation) {
+    getUserLocation.notify(userLocation);
+}
