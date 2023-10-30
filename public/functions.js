@@ -149,8 +149,8 @@ function retrieveLocalData(userLocation) {
 
 //Code design pattern observer
 
-class Subject {
-    constructor() {
+class LocationChange {
+    LocationChange() {
         this.observers = [];
     }
 
