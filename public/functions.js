@@ -105,20 +105,6 @@ function deleteMarker(key, marker) {
     markers.delete(key);
 }
 
-//##LOCATION FUNCTIONS##\\
-
-function getUserLocation(callback) {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            var userLocation = new tt.LngLat(position.coords.longitude, position.coords.latitude);
-            callback(userLocation);
-        })
-    }
-    else {
-        console.log("Geolocation is not supported by this browser.")
-    }
-}
-
 //##UTILITY FUNCTIONS##\\
 
 function createKey(marker) {
@@ -170,7 +156,21 @@ class LocationChange {
     }
 }
 
-const getUserLocation = new Subject();
+//##LOCATION FUNCTIONS##\\
+
+function getUserLocation(callback) {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var userLocation = new tt.LngLat(position.coords.longitude, position.coords.latitude);
+            callback(userLocation);
+        })
+    }
+    else {
+        console.log("Geolocation is not supported by this browser.")
+    }
+}
+
+const getUserLocation = new LocationChange();
 
 getUserLocation.addObserver(userLocation => {
     // Update the user's location on the map
