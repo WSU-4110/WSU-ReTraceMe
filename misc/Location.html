@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+
+<button onclick="getLocation()">Location & Time</button>
+<p id="loc"></p>
+
+<script>
+    const info = document.getElementById("loc");
+    
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showLocation, error);
+      }
+
+      else { 
+        info.innerHTML = "Geolocation is not supported by this browser.";
+      }
+    }
+    
+    function showLocation(position) {
+      var time = new Date(position.timestamp)
+
+      info.innerHTML = "Latitude: " + position.coords.latitude + 
+      "<br>Longitude: " + position.coords.longitude + 
+      "<br>Timestamp: " + time.toLocaleTimeString();
+    }
+
+    function error() {
+    info.innerHTML = "Unable to retrieve your location";
+    }
+</script>
+</body>
+</html>
