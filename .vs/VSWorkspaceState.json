@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\public",
+    "\\public\\images"
   ],
-  "SelectedNode": "\\map-api.html",
+  "SelectedNode": "\\public\\functions.js",
   "PreviewInSolutionExplorer": false
 }

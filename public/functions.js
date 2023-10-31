@@ -25,11 +25,11 @@ async function startTrip(userLocation) {
 //##MARKER FUNCTIONS##\\
 
 function placeMarker(userLocation) {
-    var timestamp = new Date().toLocaleString();
+    const timestamp = new Date().toLocaleString();
+    const markerFactory = new MarkerFactory();
+    const newMarker = markerFactory.createMarker(userLocation, timestamp);
 
-    newMarker = createMarker(userLocation, timestamp)
     markerClickEvent(newMarker);
-
     console.log(`Marker placed at ${userLocation} with timestamp: ${timestamp}`);
 }
 
@@ -75,7 +75,8 @@ function removeAllMarkers() {
     console.log("All markers removed.")
 }
 
-function createMarker(coords, timestamp) {
+class MarkerFactory {
+    createMarker(coords, timestamp) {
     var marker = new tt.Marker({ timestamp: timestamp }).setLngLat(coords).addTo(map)
 
     setMarkerPopup(marker, coords, timestamp)
@@ -83,6 +84,7 @@ function createMarker(coords, timestamp) {
     markers.set(createKey(marker), marker)
 
     return marker;
+    }
 }
 
 function markerClickEvent(marker) {
