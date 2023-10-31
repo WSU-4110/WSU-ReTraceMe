@@ -136,10 +136,37 @@ function loopEnder() {
 
 //USER DATA FUNCTIONS
 
-function storeLocally(userLocation) {//store data locally
-    localStorage.setItem("latitude", userLocation.lat);
-    localStorage.setItem("longitude", userLocation.lng);
-}
+const LocationStorage = (function () {
+    let ins;
+
+    function init() {
+        // Private methods and properties
+        function storeLocally(userLocation) {
+            localStorage.setItem("latitude", userLocation.lat);
+            localStorage.setItem("longitude", userLocation.lng);
+        }
+
+        return {
+            // Public method
+            storeLocation: function(userLocation) {
+                storeLocally(userLocation);
+            },
+        };
+    }
+
+    return {
+        getInstance: function () {
+            if (!ins) {
+                ins = init();
+            }
+            return ins;
+        },
+    };
+})();
+
+// Usage
+const locationStorage = LocationStorage.getInstance();
+locationStorage.storeLocation({ lat,lng });
 
 function retrieveLocalData(userLocation) {
     localStorage.getItem("latitude", userLocation.lat);
