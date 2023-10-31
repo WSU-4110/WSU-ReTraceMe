@@ -14,9 +14,11 @@ async function startTrip(userLocation) {
 
     console.log("A trip has been started.");
 
+    const locationFactory = new locationFactory();
+
     while (!endLoop) {
         await sleep(interval);
-        getUserLocation(autoPlaceMarker);
+        locationFactory.getUserLocation(autoPlaceMarker);
     }
 
     console.log("The trip has ended.");
@@ -106,18 +108,19 @@ function deleteMarker(key, marker) {
 }
 
 //##LOCATION FUNCTIONS##\\
-
-function getUserLocation(callback) {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            var userLocation = new tt.LngLat(position.coords.longitude, position.coords.latitude);
-            callback(userLocation);
-        })
+class locationFactory {
+    getUserLocation(callback) {
+        if (navigator.geolocation) {
+             navigator.geolocation.getCurrentPosition(function (position) {
+               var userLocation = new tt.LngLat(position.coords.longitude, position.coords.latitude);
+                callback(userLocation);
+            })
+        }
+        else {
+            console.log("Geolocation is not supported by this browser.")
+        }
     }
-    else {
-        console.log("Geolocation is not supported by this browser.")
-    }
-}
+};
 
 //##UTILITY FUNCTIONS##\\
 
