@@ -8,6 +8,20 @@ var map = tt.map({
     zoom: 18
 });
 
+/*
+let style = 'light'
+on darkmode/lightmode toggle click....
+if (style == 'light') {
+    style = 'dark';
+}
+else {
+    style = 'light';
+}
+*/
+
+map.setStyle('https://api.tomtom.com/style/1/style/22.2.1-*/?map=2/basic_street-' + style + '&poi=2/poi_' + style);
+
+
 const marker = new tt.Marker().setLngLat(WSU).addTo(map);
 const popup = new tt.Popup({ anchor: 'top' }).setText('Wayne State University Campus');
 marker.setPopup(popup).togglePopup();
