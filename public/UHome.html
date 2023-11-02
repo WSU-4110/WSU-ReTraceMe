@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
     <head>
 
@@ -38,38 +38,38 @@
             <textarea id="consoleLog" name="consoleLog" rows="20" cols="50"></textarea>
             <div id="myDropdown" class="dropdown-content">
                 <a onclick="getUserLocation(startTrip);" href="#start-trip">Start Trip</a>
-                <a onclick="loopEnder();" href="#start-trip">End Trip</a>
+                <a onclick="tripUtil.loopEnder();" href="#start-trip">End Trip</a>
                 <a href="#show-console">Show Console</a>
                 <a href="#about">About</a>
             </div>
         </div>
-          
+
         <span class="hamburger-menu" onclick="toggleNav()">
             <span></span>
             <span></span>
             <span></span>
         </span>
-    
-        
-    
+
+
+
         <div id="map" class="map"></div>
-    
+
         <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps-web.min.js"></script>
         <script src="functions.js"></script>
         <script src="map-setup.js"></script>
-        
+
         <div id="banner" class="banner">
             <div id="banner-content">
                 <div class="btn-group">
-                    <button class="button"><a onclick="removeMarker();" href="javascript:void(0);">Remove Waypoint</a></button> 
-                    <button class="button"><a onclick="getUserLocation(placeMarker);" href="javascript:void(0);">Add Waypoint</a></button> 
-                    <button class="button"><a onclick="removeAllMarkers();" href="javascript:void(0);">Remove All Waypoints</a></button> 
+                    <button class="button"><a onclick="markerManager.removeMarker();" href="javascript:void(0);">Remove Waypoint</a></button>
+                    <button class="button"><a onclick="getUserLocation(function(userLocation) { markerManager.placeMarker(userLocation); })" href="javascript:void(0);">Add Waypoint</a></button>
+                    <button class="button"><a onclick="markerManager.removeAllMarkers();" href="javascript:void(0);">Remove All Waypoints</a></button>
                 </div>
             </div>
         </div>
 
-          <script>
-             function toggleNav() {
+        <script>
+            function toggleNav() {
                 var element = document.getElementById("mySidenav");
                 var hamburgerMenu = document.querySelector(".hamburger-menu");
                 if (element.style.width == "600px") {
@@ -79,9 +79,9 @@
                     element.style.width = "600px";
                     hamburgerMenu.classList.add("active");
                 }
-             }
-          
-          </script>
+            }
+
+        </script>
     </body>
 
 

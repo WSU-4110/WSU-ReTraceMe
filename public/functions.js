@@ -1,112 +1,131 @@
-var markers = new Map();
-var lastClickedMarker = null;
-var lastMarkerLocation = null;
-var lastMarkerTime = null;
-var endLoop = false;
-
-//##TRIP FUNCTIONS##\\
-
-async function startTrip(userLocation) {
-    lastMarkerTime = new Date().getTime();
-    lastMarkerLocation = userLocation;
-    endLoop = false;
-    const interval = 1 * 1000; //1 second
-
-    console.log("A trip has been started.");
-
-    while (!endLoop) {
-        await sleep(interval);
-        getUserLocation(autoPlaceMarker);
+class MarkerFactory {
+    constructor(markerManager) {
+        this.markerManager = markerManager;
     }
 
-    console.log("The trip has ended.");
-}
+    createMarker(coords, timestamp) {
+        const markerManager = this.markerManager;
+        const util = new Utility();
+        var marker = new tt.Marker({ timestamp: timestamp }).setLngLat(coords).addTo(map);
 
-//##MARKER FUNCTIONS##\\
+        markerManager.setMarkerPopup(marker, coords, timestamp);
 
-function placeMarker(userLocation) {
-    var timestamp = new Date().toLocaleString();
+        markerManager.markers.set(util.createKey(marker), marker);
 
-    newMarker = createMarker(userLocation, timestamp)
-    markerClickEvent(newMarker);
-
-    console.log(`Marker placed at ${userLocation} with timestamp: ${timestamp}`);
-}
-
-function autoPlaceMarker(userLocation) {
-    const interval = 10* 1000;
-    const initialTime = lastMarkerTime;
-    const currentTime = Date.now();
-    const initialLocation = lastMarkerLocation;
-    const currentLocation = userLocation;
-    const timeElapsed = currentTime - initialTime;
-    const distanceTraveled = initialLocation.distanceTo(currentLocation);
-
-
-    //if ((distanceTraveled >= 10 || (distanceTraveled < 10 && timeElapsed >= interval)) && (initialLocation != currentLocation)) {
-    if ((distanceTraveled >= 10) || (distanceTraveled < 10 && timeElapsed >= interval)) {
-        console.log("Time Elapsed = " + timeElapsed / 1000 + " seconds");
-        console.log("Distance traveled = " + distanceTraveled + " km");
-        placeMarker(userLocation);
-        lastMarkerTime = Date.now();
-        lastMarkerLocation = userLocation;
+        return marker;
     }
 }
 
-function removeMarker() {
-    if (lastClickedMarker) {
-        var key = createKey(lastClickedMarker);
-        var coords = getMarkerCoords(lastClickedMarker);
-        //var timestamp = lastClickedMarker.getProperty('timestamp');
+class MarkerManager {
+    constructor() {
+        this.markers = new Map();
+        this.lastClickedMarker = null;
+        this.lastMarkerLocation = null;
+        this.lastMarkerTime = null;
+    }
 
-        deleteMarker(key, lastClickedMarker)
+    placeMarker(userLocation) {
+        const timestamp = new Date().toLocaleString();
+        const markerFactory = new MarkerFactory(this);
+        const newMarker = markerFactory.createMarker(userLocation, timestamp);
 
-        lastClickedMarker = null;
+        this.lastMarkerTime = Date.now();
+        this.lastMarkerLocation = userLocation;
 
-        //console.log("Marker removed at " + coords + " with timestamp: " + timestamp);
-        console.log("Marker removed at " + coords);
+        this.markerClickEvent(newMarker);
+
+        console.log(`Marker placed at ${userLocation} with timestamp: ${timestamp}`);
+    }
+
+    autoPlaceMarker(userLocation) {
+        const interval = 10* 1000;
+        const currentTime = Date.now();
+        const initialTime = this.lastMarkerTime;
+        const timeElapsed = currentTime - initialTime;
+        const distanceTraveled = (this.lastMarkerLocation).distanceTo(userLocation);
+
+
+        //if ((distanceTraveled >= 10 || (distanceTraveled < 10 && timeElapsed >= interval)) && (initialLocation != currentLocation)) {
+        if ((distanceTraveled >= 10) || (distanceTraveled < 10 && timeElapsed >= interval)) {
+            console.log("Time Elapsed = " + timeElapsed / 1000 + " seconds");
+            console.log("Distance traveled = " + distanceTraveled + " km");
+            this.placeMarker(userLocation);
+        }
+    }
+
+    removeMarker() {
+        if (this.lastClickedMarker) {
+            const util = new Utility();
+            const markerUtil = new MarkerUtility();
+            const key = util.createKey(this.lastClickedMarker);
+            const coords = markerUtil.getMarkerCoords(this.lastClickedMarker);
+            //var timestamp = lastClickedMarker.getProperty('timestamp');
+
+            this.deleteMarker(key, this.lastClickedMarker)
+ 
+            this.lastClickedMarker = null;
+
+            //console.log("Marker removed at " + coords + " with timestamp: " + timestamp);
+            console.log("Marker removed at " + coords);
+        }
+    }
+
+    removeAllMarkers() {
+        for (let [key, marker] of this.markers) {
+            this.deleteMarker(key, marker)
+        }
+        console.log("All markers removed.")
+    }
+
+    markerClickEvent(marker) {
+        marker.getElement().addEventListener('click', () => {
+            const markerUtil = new MarkerUtility();
+
+            this.lastClickedMarker = marker;
+            const coords = markerUtil.getMarkerCoords(this.lastClickedMarker);
+            console.log("last click: " + coords)
+        });
+    }
+
+    setMarkerPopup(marker, coords, timestamp) {
+        const popup = new tt.Popup({ offset: 25 }).setHTML('Lng: ' + coords.lng + ' Lat: ' + coords.lat + '<br>Timestamp: ' + timestamp);
+        marker.setPopup(popup);
+    }
+
+    deleteMarker(key, marker) {
+        marker.remove();
+        this.markers.delete(key);
     }
 }
 
-function removeAllMarkers() {
-    for (let [key, marker] of markers) {
-        deleteMarker(key, marker)
+class MarkerUtility{
+    getMarkerCoords(marker) {
+        return marker.getLngLat()
     }
-    console.log("All markers removed.")
 }
 
-function createMarker(coords, timestamp) {
-    var marker = new tt.Marker({ timestamp: timestamp }).setLngLat(coords).addTo(map)
+class Utility {
+    constructor() {
+        this.endLoop = false;
+    }
 
-    setMarkerPopup(marker, coords, timestamp)
+    createKey(marker) {
+        const markerUtil = new MarkerUtility();
+        const coords = markerUtil.getMarkerCoords(marker);
+        const key = coords.lng + " " + coords.lat;
+        return key
+    }
 
-    markers.set(createKey(marker), marker)
+    sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms)); //from stackoverflow
+    }
 
-    return marker;
+    loopEnder() {
+        this.endLoop = true;
+    }
 }
 
-function markerClickEvent(marker) {
-    marker.getElement().addEventListener('click', function () {
-        lastClickedMarker = marker
-    });
-}
-
-function setMarkerPopup(marker, coords, timestamp) {
-    var popup = new tt.Popup({ offset: 25 }).setHTML('Lng: ' + coords.lng + ' Lat: ' + coords.lat + '<br>Timestamp: ' + timestamp);
-    marker.setPopup(popup);
-}
-
-function getMarkerCoords(marker) {
-    return marker.getLngLat()
-}
-
-function deleteMarker(key, marker) {
-    marker.remove();
-    markers.delete(key);
-}
-
-//##LOCATION FUNCTIONS##\\
-
+//LOCATION FUNCTIONS
 function getUserLocation(callback) {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -119,21 +138,6 @@ function getUserLocation(callback) {
     }
 }
 
-//##UTILITY FUNCTIONS##\\
-
-function createKey(marker) {
-    var coords = getMarkerCoords(marker)
-    var key = coords.lng + " " + coords.lat;
-    return key
-}
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms)); //from stackoverflow
-}
-
-function loopEnder() {
-    endLoop = true;
-}
 
 //USER DATA FUNCTIONS
 
@@ -146,4 +150,25 @@ function retrieveLocalData(userLocation) {
     localStorage.getItem("latitude", userLocation.lat);
     localStorage.getItem("longitude", userLocation.lng);
 }
+
+//TRIP FUNCTIONS
+async function startTrip(userLocation) {
+    const interval = 1 * 1000; //1 second
+
+    markerManager.placeMarker(userLocation);
+
+    console.log("A trip has been started.");
+
+    while (!(tripUtil.endLoop)) {
+        await tripUtil.sleep(interval);
+        getUserLocation(userLocation => markerManager.autoPlaceMarker(userLocation));
+    }
+
+    tripUtil.endLoop = false;
+
+    console.log("The trip has ended.");
+}
+
+const markerManager = new MarkerManager();
+const tripUtil = new Utility();
 
