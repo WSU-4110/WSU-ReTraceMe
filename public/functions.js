@@ -16,6 +16,21 @@ class MarkerFactory {
     }
 }
 
+class markerLog {
+    static markerCount = 0;
+    
+
+    constructor() {
+        const timestamp = new Date().toLocaleString();
+        markerLog.markerCount += 1;
+        this.log = `Marker #${markerLog.markerCount} timestamp: ${timestamp}\n`;
+    }
+
+    getLog() {
+        document.getElementById("consoleLog").value += this.log;
+    }
+}
+
 class MarkerManager {
     constructor() {
         this.markers = new Map();
@@ -28,6 +43,9 @@ class MarkerManager {
         const timestamp = new Date().toLocaleString();
         const markerFactory = new MarkerFactory(this);
         const newMarker = markerFactory.createMarker(userLocation, timestamp);
+
+        const log = new markerLog();
+        log.getLog();
 
         this.lastMarkerTime = Date.now();
         this.lastMarkerLocation = userLocation;
