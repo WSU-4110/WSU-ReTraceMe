@@ -1,6 +1,8 @@
 class MarkerFactory {
     constructor(markerManager) {
         this.markerManager = markerManager;
+        this.stationaryTime = 0;
+        this.stationaryLocation = null;
     }
 
     createMarker(coords, timestamp) {
@@ -68,6 +70,14 @@ class MarkerManager {
             console.log("Time Elapsed = " + timeElapsed / 1000 + " seconds");
             console.log("Distance traveled = " + distanceTraveled + " km");
             this.placeMarker(userLocation);
+        }
+        else {
+            this.stationaryTime += interval;
+            if (this.stationaryTime >= interval) {
+                this.placeMarker(userLocation);
+                this.stationaryTime = 0;
+                this.stationaryLocation = userLocation;
+            }
         }
     }
 
