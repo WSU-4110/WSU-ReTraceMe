@@ -1,8 +1,6 @@
 class MarkerFactory {
     constructor(markerManager) {
         this.markerManager = markerManager;
-        this.stationaryTime = 0;
-        this.stationaryLocation = null;
     }
 
     createMarker(coords, timestamp) {
@@ -21,7 +19,6 @@ class MarkerFactory {
 class markerLog {
     static markerCount = 0;
     
-
     constructor() {
         const timestamp = new Date().toLocaleString();
         markerLog.markerCount += 1;
@@ -65,20 +62,15 @@ class MarkerManager {
         const distanceTraveled = (this.lastMarkerLocation).distanceTo(userLocation);
 
 
-        //if ((distanceTraveled >= 10 || (distanceTraveled < 10 && timeElapsed >= interval)) && (initialLocation != currentLocation)) {
-        if ((distanceTraveled >= 10) || (distanceTraveled < 10 && timeElapsed >= interval)) {
+        if (this.shouldAutoPlace(distanceTraveled, timeElapsed, interval)) {
             console.log("Time Elapsed = " + timeElapsed / 1000 + " seconds");
             console.log("Distance traveled = " + distanceTraveled + " km");
             this.placeMarker(userLocation);
         }
-        else {
-            this.stationaryTime += interval;
-            if (this.stationaryTime >= interval) {
-                this.placeMarker(userLocation);
-                this.stationaryTime = 0;
-                this.stationaryLocation = userLocation;
-            }
-        }
+    }
+
+    shouldAutoPlace(distanceTraveled, timeElapsed, interval) {
+        return (distanceTraveled > 3 && timeElapsed >= interval) || (distanceTraveled >= 10);
     }
 
     removeMarker() {
