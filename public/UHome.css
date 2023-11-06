@@ -1,0 +1,142 @@
+body {
+    font-family: "Lato", sans-serif;
+  }
+
+
+.button a {
+    text-decoration: none;
+    color: white;
+}
+
+#banner {
+    display: flex;
+    justify-content: space-around;
+}
+@media screen and (max-width: 600px) {
+    #banner-content {
+        flex-direction: column;
+    }
+}
+@media screen and (min-width: 601px) {
+    #banner-content {
+        flex-direction: row;
+    }
+}
+  .sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #000000;
+    opacity: 0.8;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+  
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+  
+span {
+    font-size: 30px;
+    cursor: pointer;
+    position: relative; 
+    z-index: 2; 
+    }
+  
+@media screen and (max-height: 450px) {
+.sidenav {padding-top: 15px;}
+.sidenav a {font-size: 18px;}
+}
+
+.hamburger-menu {
+    cursor: pointer;
+    display: inline-block;
+  }
+  
+  .hamburger-menu span {
+    display: block;
+    width: 33px;
+    height: 4px;
+    margin-bottom: 5px;
+    margin-top: 4px;
+    margin-left: 4px;
+    background-color: #b9b9b9;
+    transition: all 0.3s;
+  }
+  
+  .hamburger-menu.active span:nth-child(1) {
+    transform: rotate(-45deg) translate(-9px, 6px);
+  }
+  
+  .hamburger-menu.active span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .hamburger-menu.active span:nth-child(3) {
+    transform: rotate(45deg) translate(-8px, -8px);
+  }
+  
+  textarea {
+    margin: 10px 15px 20px 90px;
+    resize: none;
+    
+  }
+  
+  div#banner { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    background-color: #242928; 
+    width: 100%; 
+  }
+  div#banner-content { 
+    width: 800px; 
+    height: 30px;
+    margin: 0 auto; 
+    padding: 10px; 
+   }
+
+  .btn-group {
+    display: flex;
+    justify-content: space-around;
+  }
+  .btn-group .button {
+    background-color: #242928; 
+    border: none;
+    color: white;
+    padding: 5px 5px;
+    margin: 3px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    float: left;
+  }
+
+  .btn-group .button:hover {
+    background-color: #009688;
+  }
+
+
+
+  
+
+
+
+  
+  
+  
