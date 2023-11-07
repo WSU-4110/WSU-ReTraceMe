@@ -184,6 +184,8 @@ function retrieveLocalData(userLocation) {
 //TRIP FUNCTIONS
 async function startTrip(userLocation) {
     //display start trip in console log
+    markerLog.markerCount = 0;
+    document.getElementById("consoleLog").value = "";
     const timestamp = new Date().toLocaleString();
     document.getElementById("consoleLog").value += `[${timestamp}]: A trip has been started\n`;
 
@@ -205,6 +207,7 @@ async function startTrip(userLocation) {
     //display end trip in console log
     const timestamp2 = new Date().toLocaleString();
     document.getElementById("consoleLog").value += `[${timestamp2}]: The trip has ended\n`;
+    
 }
 
 const markerManager = new MarkerManager();
