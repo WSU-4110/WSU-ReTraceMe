@@ -119,6 +119,13 @@ textarea {
       border-radius: 5px;
   }
 
+textarea{
+  margin-left: 130px;
+  margin-top: 1px;
+  margin-right: 10px;  
+  background-color: #f1f1f1;
+}
+
 
 
   

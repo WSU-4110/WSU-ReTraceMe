@@ -36,7 +36,7 @@
     
     <body>
         <div id="mySidenav" class="sidenav">
-            <textarea id="consoleLog" name="consoleLog" rows="20" cols="50"></textarea>
+            <textarea id="consoleLog" name="consoleLog" rows="30" cols="50"></textarea>
             <div id="myDropdown" class="dropdown-content">
                 <!---->
             </div>
@@ -64,11 +64,11 @@
         <div id="banner" class="banner">
             <div id="banner-content">
                 <div class="btn-group">
-                    <button class="button"><a onclick="getUserLocation(startTrip);" href="#start-trip"><span class="material-symbols-outlined">assistant_direction</span></a></button>
-                    <button class="button"><a onclick="tripUtil.loopEnder();" href="#start-trip"><span class="material-symbols-outlined">close</span></a></button>
-                    <button class="button"><a onclick="markerManager.removeMarker();" href="javascript:void(0);"><span class="material-symbols-outlined">indeterminate_check_box</span></a></button>
-                    <button class="button"><a onclick="getUserLocation(function(userLocation) { markerManager.placeMarker(userLocation); })" href="javascript:void(0);"><span class="material-symbols-outlined">add_box</span></a></button>
-                    <button class="button"><a onclick="markerManager.removeAllMarkers();" href="javascript:void(0);"><span class="material-symbols-outlined">delete_forever</span></a></button>
+                    <button class="button" title="Start Trip"><a onclick="getUserLocation(startTrip);" href="#start-trip"><span class="material-symbols-outlined">assistant_direction</span></a></button>
+                    <button class="button" title="End Trip"><a onclick="tripUtil.loopEnder();" href="#start-trip"><span class="material-symbols-outlined">close</span></a></button>
+                    <button class="button" title="Add Marker"><a onclick="getUserLocation(function(userLocation) { markerManager.placeMarker(userLocation); })" href="javascript:void(0);"><span class="material-symbols-outlined">add_box</span></a></button>
+                    <button class="button" title="Remove Marker"><a onclick="markerManager.removeMarker();" href="javascript:void(0);"><span class="material-symbols-outlined">indeterminate_check_box</span></a></button>
+                    <button class="button" title="Remove All Markers"><a onclick="markerManager.removeAllMarkers();" href="javascript:void(0);"><span class="material-symbols-outlined">delete_forever</span></a></button>
                 </div>
             </div>
         </div>
