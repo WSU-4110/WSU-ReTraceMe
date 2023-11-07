@@ -5,7 +5,8 @@ var map = tt.map({
     key: "wWiYy6VgRhpS4PPvp2RT0aDq7o7MTNAD",
     container: "map",
     center: WSU,
-    zoom: 18
+    zoom: 18,
+    style: 'https://api.tomtom.com/style/1/style/22.2.1-*/?map=2/basic_street-light&poi=2/poi_light'
 });
 
 
