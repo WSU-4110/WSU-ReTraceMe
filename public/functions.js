@@ -102,7 +102,7 @@ class MarkerManager {
 
         //display removal in console log
         const timestamp = new Date().toLocaleString();
-        document.getElementById("consoleLog").value += `[${timestamp}]: All Markers Removed\n`;
+        document.getElementById("consoleLog").value += `[${timestamp}]: All markers removed\n`;
 
         console.log("All markers removed.")
     }
@@ -203,8 +203,8 @@ async function startTrip(userLocation) {
     console.log("The trip has ended.");
 
     //display end trip in console log
-    timestamp = new Date().toLocaleString();
-    document.getElementById("consoleLog").value += `[${timestamp}]: The trip has ended\n`;
+    const timestamp2 = new Date().toLocaleString();
+    document.getElementById("consoleLog").value += `[${timestamp2}]: The trip has ended\n`;
 }
 
 const markerManager = new MarkerManager();
