@@ -1,5 +1,6 @@
 body {
     font-family: "Lato", sans-serif;
+    background-color: #242928;
   }
 
 
@@ -55,41 +56,27 @@ span {
     position: relative; 
     z-index: 2; 
     }
-  
+
+.material-symbols-outlined {
+  color: white;
+  font-variation-settings:
+          'FILL' 0,
+          'wght' 500,
+          'GRAD' 100,
+          'opsz' 100
+}
+.material-symbols-outlined:hover{
+    background-color: #009688;
+    border-radius: 5px;
+}
+
+
 @media screen and (max-height: 450px) {
 .sidenav {padding-top: 15px;}
 .sidenav a {font-size: 18px;}
 }
 
-.hamburger-menu {
-    cursor: pointer;
-    display: inline-block;
-  }
-  
-  .hamburger-menu span {
-    display: block;
-    width: 33px;
-    height: 4px;
-    margin-bottom: 5px;
-    margin-top: 4px;
-    margin-left: 4px;
-    background-color: #b9b9b9;
-    transition: all 0.3s;
-  }
-  
-  .hamburger-menu.active span:nth-child(1) {
-    transform: rotate(-45deg) translate(-9px, 6px);
-  }
-  
-  .hamburger-menu.active span:nth-child(2) {
-    opacity: 0;
-  }
-  
-  .hamburger-menu.active span:nth-child(3) {
-    transform: rotate(45deg) translate(-8px, -8px);
-  }
-  
-  textarea {
+textarea {
     margin: 10px 15px 20px 90px;
     resize: none;
     
@@ -99,37 +86,47 @@ span {
     position: absolute; 
     top: 0; 
     left: 0; 
-    background-color: #242928; 
-    width: 100%; 
+    /*background-image: linear-gradient(#009688, #01645a, #1c3a37, #242928, black);*/
+    background-image: linear-gradient(#242928, #313736);
+    height: 100%; 
   }
   div#banner-content { 
-    width: 800px; 
-    height: 30px;
+    height: 300px; 
+    width: 50px;
     margin: 0 auto; 
     padding: 10px; 
    }
 
   .btn-group {
-    display: flex;
+    display: block;
     justify-content: space-around;
+    margin-top: 50px;
   }
   .btn-group .button {
-    background-color: #242928; 
+    background: transparent; 
     border: none;
     color: white;
-    padding: 5px 5px;
-    margin: 3px;
+    padding: 10px 10px;
+    margin: 7px;
+    margin-left: 4px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
     cursor: pointer;
-    float: left;
   }
 
   .btn-group .button:hover {
     background-color: #009688;
+      border-radius: 5px;
   }
+
+textarea{
+  margin-left: 130px;
+  margin-top: 1px;
+  margin-right: 10px;  
+  background-color: #f1f1f1;
+}
 
 
 
