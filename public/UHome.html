@@ -28,9 +28,8 @@
                 position: absolute;
                 top: 0;
                 left: 0;
+                border-radius: 25px;
             }
-
-
         </style>
     </head>
     
@@ -41,9 +40,6 @@
                 <!---->
             </div>
         </div>
-
-
-
 
 
         <div id="map" class="map"></div>
@@ -61,6 +57,7 @@
                             menu
                 </span>
         </div>
+        
         <div id="banner" class="banner">
             <div id="banner-content">
                 <div class="btn-group">
@@ -69,6 +66,7 @@
                     <button class="button" title="Add Marker"><a onclick="getUserLocation(function(userLocation) { markerManager.placeMarker(userLocation); })" href="javascript:void(0);"><span class="material-symbols-outlined">add_box</span></a></button>
                     <button class="button" title="Remove Marker"><a onclick="markerManager.removeMarker();" href="javascript:void(0);"><span class="material-symbols-outlined">indeterminate_check_box</span></a></button>
                     <button class="button" title="Remove All Markers"><a onclick="markerManager.removeAllMarkers();" href="javascript:void(0);"><span class="material-symbols-outlined">delete_forever</span></a></button>
+                    <button class="button" title="Toggle Mode"><a onclick=""><span class="material-symbols-outlined">toggle_on</span></a></button>
                 </div>
             </div>
         </div>
@@ -88,6 +86,4 @@
 
         </script>
     </body>
-
-
 </html>

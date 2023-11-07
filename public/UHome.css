@@ -1,5 +1,6 @@
 body {
     font-family: "Lato", sans-serif;
+    background-color: #242928;
   }
 
 
@@ -85,11 +86,12 @@ textarea {
     position: absolute; 
     top: 0; 
     left: 0; 
-    background-color: #242928; 
+    /*background-image: linear-gradient(#009688, #01645a, #1c3a37, #242928, black);*/
+    background-image: linear-gradient(#242928, #313736);
     height: 100%; 
   }
   div#banner-content { 
-    height: 800px; 
+    height: 300px; 
     width: 50px;
     margin: 0 auto; 
     padding: 10px; 
@@ -101,7 +103,7 @@ textarea {
     margin-top: 50px;
   }
   .btn-group .button {
-    background-color: #242928; 
+    background: transparent; 
     border: none;
     color: white;
     padding: 10px 10px;
