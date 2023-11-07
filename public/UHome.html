@@ -38,10 +38,7 @@
         <div id="mySidenav" class="sidenav">
             <textarea id="consoleLog" name="consoleLog" rows="20" cols="50"></textarea>
             <div id="myDropdown" class="dropdown-content">
-                <a onclick="getUserLocation(startTrip);" href="#start-trip">Start Trip</a>
-                <a onclick="tripUtil.loopEnder();" href="#start-trip">End Trip</a>
-                <a href="#show-console">Show Console</a>
-                <a href="#about">About</a>
+                <!---->
             </div>
         </div>
 
@@ -66,6 +63,8 @@
         <div id="banner" class="banner">
             <div id="banner-content">
                 <div class="btn-group">
+                    <button class="button"><a onclick="getUserLocation(startTrip);" href="#start-trip">Start Trip</a></button>
+                    <button class="button"><a onclick="tripUtil.loopEnder();" href="#start-trip">End Trip</a></button>
                     <button class="button"><a onclick="markerManager.removeMarker();" href="javascript:void(0);">Remove Waypoint</a></button>
                     <button class="button"><a onclick="getUserLocation(function(userLocation) { markerManager.placeMarker(userLocation); })" href="javascript:void(0);">Add Waypoint</a></button>
                     <button class="button"><a onclick="markerManager.removeAllMarkers();" href="javascript:void(0);">Remove All Waypoints</a></button>
