@@ -19,6 +19,8 @@ function changeStyle() {
         style = 'light';
     }
     map.setStyle('https://api.tomtom.com/style/1/style/22.2.1-*/?map=2/basic_street-' + style + '&poi=2/poi_' + style);
+    const mode = new consoleLog();
+    mode.getChange();
 }
 
 const marker = new tt.Marker().setLngLat(WSU).addTo(map);
