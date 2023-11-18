@@ -168,7 +168,6 @@ function getUserLocation(callback) {
     }
 }
 
-
 //USER DATA FUNCTIONS
 
 function storeLocally(userLocation) {
@@ -181,35 +180,54 @@ function retrieveLocalData(userLocation) {
     localStorage.getItem("longitude", userLocation.lng);
 }
 
-//TRIP FUNCTIONS
-async function startTrip(userLocation) {
-    //display start trip in console log
-    markerLog.markerCount = 0;
-    document.getElementById("consoleLog").value = "";
-    const timestamp = new Date().toLocaleString();
-    document.getElementById("consoleLog").value += `[${timestamp}]: A trip has been started\n`;
+class tripManagement{
+    tripUtil;
+    markerManager;
+    constructor() {
+        const interval = 1000;
+        const markerManager = new MarkerManager();
+        const tripUtil = new Utility();
+    }
+    markTripAsStarted(userLocation) {
+        //display start trip in console log
+        markerLog.markerCount = 0;
+        // document.getElementById("consoleLog").value = "";
+        const timestamp = new Date().toLocaleString();
+        // document.getElementById("consoleLog").value += `[${timestamp}]: A trip has been started\n`;
 
-    const interval = 1 * 1000; //1 second
+        const interval = 1000; //1 second
 
-    markerManager.placeMarker(userLocation);
+        this.markerManager.placeMarker(userLocation);
 
-    console.log("A trip has been started.");
-
-    while (!(tripUtil.endLoop)) {
-        await tripUtil.sleep(interval);
-        getUserLocation(userLocation => markerManager.autoPlaceMarker(userLocation));
+        console.log("A trip has been started.");
+        return interval;
     }
 
-    tripUtil.endLoop = false;
+    markTripAsEnded() {
+        this.tripUtil.endLoop = false;
 
-    console.log("The trip has ended.");
+        console.log("The trip has ended.");
 
-    //display end trip in console log
-    const timestamp2 = new Date().toLocaleString();
-    document.getElementById("consoleLog").value += `[${timestamp2}]: The trip has ended\n`;
-    
+        //display end trip in console log
+        const timestamp2 = new Date().toLocaleString();
+        document.getElementById("consoleLog").value += `[${timestamp2}]: The trip has ended\n`;
+    }
+
+//TRIP FUNCTIONS
+
+    async startTrip(userLocation) {
+
+        const interval = this.markTripAsStarted(userLocation);
+
+        while (!(this.tripUtil.endLoop)) {
+            await this.tripUtil.sleep(interval);
+            getUserLocation(userLocation => this.markerManager.autoPlaceMarker(userLocation));
+        }
+
+        this.markTripAsEnded();
+
+    }
 }
 
-const markerManager = new MarkerManager();
-const tripUtil = new Utility();
+
 
