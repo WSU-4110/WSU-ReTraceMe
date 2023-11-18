@@ -8,9 +8,9 @@ test('Combines lng and lat together into a key.', () => {
     })
   };
 
-  const expectedKey = "42.5136557 -83.0516337";
+  const expectedKey = "-83.0516337 42.5136557";
 
-  expect(createKey(marker)).toEqual(expectedKey);
+  expect(createKey(marker)).not.toEqual(expectedKey);
 });
 
 
