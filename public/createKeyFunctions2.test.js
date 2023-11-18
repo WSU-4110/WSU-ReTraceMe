@@ -1,6 +1,6 @@
 const createKey = require('./createKeyFunctions.js');
 
-test('Combines lng and lat together into a key.', () => {
+test('Combines lng and lat together into a key in correct oroder.', () => {
   const marker = {
     getLngLat: jest.fn().mockReturnValue({
       lng: 42.5136557,
