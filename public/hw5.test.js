@@ -25,45 +25,55 @@ class LocationStorage {
 }
 
 describe('LocationStorage', () => {
+    // Mock localStorage before each test
+    beforeEach(() => {
+        const localStorageMock = {
+            getItem: jest.fn(),
+            setItem: jest.fn(),
+            removeItem: jest.fn(),
+        };
+        global.localStorage = localStorageMock;
+    });
+
     // Store Latitude
     it('should store latitude in localStorage', () => {
         const latitude = 40.7128;
         LocationStorage.storeLatitude(latitude);
-        expect(LocationStorage.retrieveLatitude()).toBe(latitude.toString());
+        expect(localStorage.setItem).toHaveBeenCalledWith("latitude", latitude);
     });
 
-    // Store Longitude
     it('should store longitude in localStorage', () => {
         const longitude = -74.0060;
         LocationStorage.storeLongitude(longitude);
-        expect(LocationStorage.retrieveLongitude()).toBe(longitude.toString());
+        expect(localStorage.setItem).toHaveBeenCalledWith("longitude", longitude);
     });
 
     // Store Timestamp
     it('should store timestamp in localStorage', () => {
         const timestamp = new Date().toISOString();
         LocationStorage.storeTimestamp(timestamp);
-        expect(LocationStorage.retrieveTimestamp()).toBe(timestamp);
+        expect(localStorage.setItem).toHaveBeenCalledWith("Timestamp", timestamp);
     });
 
     // Retrieve Latitude
     it('should retrieve latitude from localStorage', () => {
         const latitude = 40.7128;
-        localStorage.setItem("latitude", latitude.toString());
+        localStorage.getItem.mockReturnValue(latitude.toString());
         expect(LocationStorage.retrieveLatitude()).toBe(latitude.toString());
     });
 
     // Retrieve Longitude
     it('should retrieve longitude from localStorage', () => {
         const longitude = -74.0060;
-        localStorage.setItem("longitude", longitude.toString());
+        localStorage.getItem.mockReturnValue(longitude.toString());
         expect(LocationStorage.retrieveLongitude()).toBe(longitude.toString());
     });
 
     // Retrieve Timestamp
     it('should retrieve timestamp from localStorage', () => {
         const timestamp = new Date().toISOString();
-        localStorage.setItem("Timestamp", timestamp);
+        localStorage.getItem.mockReturnValue(timestamp);
         expect(LocationStorage.retrieveTimestamp()).toBe(timestamp);
     });
+
 });
