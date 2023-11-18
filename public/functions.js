@@ -1,3 +1,4 @@
+
 class MarkerFactory {
     constructor(markerManager) {
         this.markerManager = markerManager;
@@ -44,8 +45,8 @@ class MarkerManager {
         const newMarker = markerFactory.createMarker(userLocation, timestamp);
 
         //Display new marker in console log
-        const log = new markerLog();
-        log.getLog();
+        //const log = new markerLog();
+        //log.getLog();
 
         this.lastMarkerTime = Date.now();
         this.lastMarkerLocation = userLocation;
@@ -88,7 +89,7 @@ class MarkerManager {
 
             //display removal in console log
             const timestamp = new Date().toLocaleString();
-            document.getElementById("consoleLog").value += `[${timestamp}]: Marker removed\n`;
+            //document.getElementById("consoleLog").value += `[${timestamp}]: Marker removed\n`;
 
             //console.log("Marker removed at " + coords + " with timestamp: " + timestamp);
             console.log("Marker removed at " + coords);
@@ -102,7 +103,7 @@ class MarkerManager {
 
         //display removal in console log
         const timestamp = new Date().toLocaleString();
-        document.getElementById("consoleLog").value += `[${timestamp}]: All markers removed\n`;
+        //document.getElementById("consoleLog").value += `[${timestamp}]: All markers removed\n`;
 
         console.log("All markers removed.")
     }
@@ -213,3 +214,4 @@ async function startTrip(userLocation) {
 const markerManager = new MarkerManager();
 const tripUtil = new Utility();
 
+module.exports = { MarkerManager, MarkerFactory, Utility, MarkerUtility };

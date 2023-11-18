@@ -1,0 +1,18 @@
+{
+  "name": "wsu-retraceme",
+  "version": "1.0.0",
+  "description": "\"# WSU-ReTraceMe\" \r ReTraceMe app is used to retrace your steps so you never get lost again!",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "selenium-webdriver": "^4.15.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
