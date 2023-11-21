@@ -75,23 +75,23 @@ class MarkerManager {
         min_distance = 3;
 
         //avg walking speed is 80 m/min
-        const default_time_interval = 15;
-        const defualt_distance_interval = 20;
+        const default_time_interval = 30;
+        const defualt_distance_interval = 40;
 
         if (checkbox1) {
             // 4 markers a minute
-            time_interval = default_time_interval; // 15 seconds
-            distance_interval = defualt_distance_interval; // 20 meters
+            time_interval = default_time_interval; // 30 seconds
+            distance_interval = defualt_distance_interval; // 40 meters
         }
         else if (checkbox2) {
             // 1 marker a minute
-            time_interval = 4 * default_time_interval; // 60 seconds
-            distance_interval = 4 * defualt_distance_interval; // 80 meters
+            time_interval = 2 * default_time_interval; // 60 seconds
+            distance_interval = 2 * defualt_distance_interval; // 80 meters
         }
         else if (checkbox3) {
             // 1 marker every 2 minutes
-            time_interval = 8 * default_time_interval; // 120 seconds
-            distance_interval = 8 * defualt_distance_interval; // 160 meters
+            time_interval = 4 * default_time_interval; // 120 seconds
+            distance_interval = 4 * defualt_distance_interval; // 160 meters
         }
         else
         {
