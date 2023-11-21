@@ -6,7 +6,7 @@ class MarkerFactory {
     createMarker(coords, timestamp, color) {
         const markerManager = this.markerManager;
         const util = new Utility();
-        var marker = new tt.Marker({ timestamp: timestamp, color:color }).setLngLat(coords).addTo(map);
+        var marker = new tt.Marker({ timestamp: timestamp, color: color }).setLngLat(coords).addTo(map);
 
         markerManager.setMarkerPopup(marker, coords, timestamp);
 
@@ -43,7 +43,7 @@ class MarkerManager {
         setColor = color;
         const timestamp = new Date().toLocaleString();
         const markerFactory = new MarkerFactory(this);
-        const newMarker = markerFactory.createMarker(userLocation, timestamp, color);
+        const newMarker = markerFactory.createMarker(userLocation, timestamp, setColor);
 
         //Display new marker in console log
         const log = new markerLog();
@@ -193,7 +193,7 @@ async function startTrip(userLocation) {
 
     const interval = 1 * 1000; //1 second
 
-    markerManager.placeMarker(userLocation, 'lime');
+    markerManager.placeMarker(userLocation, 'green');
 
     console.log("A trip has been started.");
 
@@ -203,15 +203,13 @@ async function startTrip(userLocation) {
     }
 
     tripUtil.endLoop = false;
-    markerManager.placeMarker(userLocation, 'red');
+    getUserLocation(userLocation => markerManager.placeMarker(userLocation, 'red'));
     console.log("The trip has ended.");
 
     //display end trip in console log
     const timestamp2 = new Date().toLocaleString();
     document.getElementById("consoleLog").value += `[${timestamp2}]: The trip has ended\n`;
-    
 }
 
 const markerManager = new MarkerManager();
 const tripUtil = new Utility();
-
