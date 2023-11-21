@@ -56,22 +56,43 @@ class MarkerManager {
     }
 
     autoPlaceMarker(userLocation) {
-        const interval = 10* 1000;
         const currentTime = Date.now();
         const initialTime = this.lastMarkerTime;
         const timeElapsed = currentTime - initialTime;
         const distanceTraveled = (this.lastMarkerLocation).distanceTo(userLocation);
 
 
-        if (this.shouldAutoPlace(distanceTraveled, timeElapsed, interval)) {
+        if (this.shouldAutoPlace(distanceTraveled, timeElapsed)) {
             console.log("Time Elapsed = " + timeElapsed / 1000 + " seconds");
             console.log("Distance traveled = " + distanceTraveled + " km");
             this.placeMarker(userLocation);
         }
     }
 
-    shouldAutoPlace(distanceTraveled, timeElapsed, interval) {
-        return (distanceTraveled > 3 && timeElapsed >= interval) || (distanceTraveled >= 10);
+    shouldAutoPlace(distanceTraveled, timeElapsed) {
+        min_distance = 3;
+
+        //avg walking speed is 80 m/min
+        const default_time_interval = 15;
+        const defualt_distance_interval = 20;
+
+        if (button1) {
+            // 4 markers a minute
+            time_interval = default_time_interval;
+            distance_interval = defualt_distance_interval;
+        }
+        else if (button2) {
+            // 1 marker a minute
+            time_interval = 4 * default_time_interval; //60 seconds
+            distance_interval = 4 * defualt_distance_interval; //80 meters
+        }
+        else if (button3) {
+            // 1 marker every 2 minutes
+            time_interval = 8 * default_time_interval; //120 seconds
+            distance_interval = 8 * defualt_distance_interval; // 160 meters
+        }
+
+        return (distanceTraveled > min_distance && timeElapsed >= interval) || (distanceTraveled >= distance_interval);
     }
 
     removeMarker() {
