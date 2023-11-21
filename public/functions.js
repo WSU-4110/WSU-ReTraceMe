@@ -69,6 +69,8 @@ class MarkerManager {
         }
     }
 
+
+    //Interval options prototype, needs checkboxes to connect to.
     shouldAutoPlace(distanceTraveled, timeElapsed) {
         min_distance = 3;
 
@@ -76,20 +78,26 @@ class MarkerManager {
         const default_time_interval = 15;
         const defualt_distance_interval = 20;
 
-        if (button1) {
+        if (checkbox1) {
             // 4 markers a minute
+            time_interval = default_time_interval; // 15 seconds
+            distance_interval = defualt_distance_interval; // 20 meters
+        }
+        else if (checkbox2) {
+            // 1 marker a minute
+            time_interval = 4 * default_time_interval; // 60 seconds
+            distance_interval = 4 * defualt_distance_interval; // 80 meters
+        }
+        else if (checkbox3) {
+            // 1 marker every 2 minutes
+            time_interval = 8 * default_time_interval; // 120 seconds
+            distance_interval = 8 * defualt_distance_interval; // 160 meters
+        }
+        else
+        {
+            // default
             time_interval = default_time_interval;
             distance_interval = defualt_distance_interval;
-        }
-        else if (button2) {
-            // 1 marker a minute
-            time_interval = 4 * default_time_interval; //60 seconds
-            distance_interval = 4 * defualt_distance_interval; //80 meters
-        }
-        else if (button3) {
-            // 1 marker every 2 minutes
-            time_interval = 8 * default_time_interval; //120 seconds
-            distance_interval = 8 * defualt_distance_interval; // 160 meters
         }
 
         return (distanceTraveled > min_distance && timeElapsed >= interval) || (distanceTraveled >= distance_interval);
