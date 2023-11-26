@@ -209,7 +209,12 @@ async function startTrip(userLocation) {
     document.getElementById("consoleLog").value += `[${timestamp2}]: The trip has ended\n`;
     
 }
-
+const button = document.querySelector("button")
+button.addEventListener("Notifications", () => {
+    Notification.requestPermission().then(perm => {
+        alert(perm)
+    })
+})
 const markerManager = new MarkerManager();
 const tripUtil = new Utility();
 
