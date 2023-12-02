@@ -92,7 +92,7 @@ class MarkerManager {
             console.log("Distance traveled = " + distanceTraveled + " km");
             this.placeMarker(userLocation);
         }
-    }
+    } 
 
     shouldAutoPlace(distanceTraveled, timeElapsed, interval) {
         return (distanceTraveled > 3 && timeElapsed >= interval) || (distanceTraveled >= 10);
