@@ -72,6 +72,7 @@ class MarkerManager {
 
     shouldAutoPlace(distanceTraveled, timeElapsed, interval) {
         return (distanceTraveled > 3 && timeElapsed >= interval) || (distanceTraveled >= 10);
+        flashDot();
     }
 
     removeMarker() {
@@ -212,9 +213,17 @@ async function startTrip(userLocation) {
 
 function requestNotifs() {
     Notification.requestPermission().then(perm => {
-        alert(perm);
+        if(perm == 'granted'){
+        }
     })
 }
+function flashDot() {
+    var dot = document.getElementById('notificationDot');
+    dot.style.visibility = (dot.style.visibility === 'hidden') ? 'visible' : 'hidden';
+}
+setInterval(flashDot,600);
+
+
 
 const markerManager = new MarkerManager();
 const tripUtil = new Utility();

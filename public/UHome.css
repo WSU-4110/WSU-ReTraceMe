@@ -135,6 +135,7 @@ textarea{
     background-color: red;
     border-radius:50%;
     display: inline-block;
+    visibility: hidden;
 }
 
 
