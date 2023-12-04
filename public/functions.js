@@ -1,4 +1,3 @@
-let count = 1; // Initial count value
 class MarkerFactory {
     constructor(markerManager) {
         this.markerManager = markerManager;
@@ -97,7 +96,6 @@ class MarkerManager {
 
     shouldAutoPlace(distanceTraveled, timeElapsed, interval) {
         return (distanceTraveled > 3 && timeElapsed >= interval) || (distanceTraveled >= 10);
-        //flashDot();
     }
 
     removeMarker() {
@@ -216,11 +214,12 @@ async function startTrip(userLocation) {
     const interval = 1 * 1000; //1 second
 
     markerManager.placeMarker(userLocation, 'green');
+    flashDot();
 
     console.log("A trip has been started.");
     // Initially hide the dot
     var dot = document.getElementById('notificationDot');
-    dot.style.visibility = 'hidden';
+    dot.style.visibility = 'visible';
 
     while (!(tripUtil.endLoop)) {
         await tripUtil.sleep(interval);
@@ -246,9 +245,9 @@ function requestNotifs() {
 
 function flashDot() {
     var dot = document.getElementById('notificationDot');
-    dot.textContent = count; // Set the content of the dot to the current count
+    dot.textContent = consoleLog.markerCount; // Set the content of the dot to the current count
     dot.style.visibility = 'visible';
-    count = (count + 1) ; // Increment count and keep it in the range [0, 9]
+     // Increment count and keep it in the range [0, 9]
 }
 
 
