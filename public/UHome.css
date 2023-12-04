@@ -1,8 +1,7 @@
 body {
     font-family: "Lato", sans-serif;
     background-color: #242928;
-  }
-
+}
 
 .button a {
     text-decoration: none;
@@ -13,49 +12,40 @@ body {
     display: flex;
     justify-content: space-around;
 }
-@media screen and (max-width: 600px) {
-    #banner-content {
-        flex-direction: column;
-    }
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #000000;
+  opacity: 0.8;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
 }
-@media screen and (min-width: 601px) {
-    #banner-content {
-        flex-direction: row;
-    }
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
 }
-  .sidenav {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #000000;
-    opacity: 0.8;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
-  }
-  
-  .sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
-  }
-  
-  .sidenav a:hover {
-    color: #f1f1f1;
-  }
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
   
 span {
     font-size: 30px;
     cursor: pointer;
     position: relative; 
     z-index: 2; 
-    }
+}
 
 .material-symbols-outlined {
   color: white;
@@ -70,37 +60,113 @@ span {
     border-radius: 5px;
 }
 
-
-@media screen and (max-height: 450px) {
-.sidenav {padding-top: 15px;}
-.sidenav a {font-size: 18px;}
-}
-
 textarea {
     margin: 10px 15px 20px 90px;
     resize: none;
-    
+}
+  
+div#banner { 
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  /*background-image: linear-gradient(#009688, #01645a, #1c3a37, #242928, black);*/
+  background-image: linear-gradient(#242928, #313736);
+  height: 100%; 
+}
+div#banner-content { 
+  height: 300px; 
+  width: 50px;
+  margin: 0 auto; 
+  padding: 10px; 
+  }
+
+.btn-group {
+  display: block;
+  justify-content: space-around;
+  margin-top: 50px;
+}
+.btn-group .button {
+  background: transparent; 
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  margin: 7px;
+  margin-left: 4px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn-group .button:hover {
+  background-color: #009688;
+    border-radius: 5px;
+}
+
+textarea{
+  margin-left: 130px;
+  margin-top: 1px;
+  margin-right: 10px;  
+  background-color: #f1f1f1;
+}
+
+
+
+@media screen and (max-width: 600px) {
+  .sidenav {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+  }
+
+  .sidenav {
+    height: 0;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #cc1313;
+    opacity: 0.8;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
   }
   
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+
   div#banner { 
     position: absolute; 
-    top: 0; 
+    bottom: 0; 
     left: 0; 
     /*background-image: linear-gradient(#009688, #01645a, #1c3a37, #242928, black);*/
     background-image: linear-gradient(#242928, #313736);
-    height: 100%; 
+    height: 10%;
+    width: 100%; 
   }
   div#banner-content { 
     height: 300px; 
     width: 50px;
     margin: 0 auto; 
     padding: 10px; 
-   }
+  }
 
   .btn-group {
-    display: block;
+    display: flex;
     justify-content: space-around;
-    margin-top: 50px;
+    margin-top: 20px;
   }
   .btn-group .button {
     background: transparent; 
@@ -115,19 +181,13 @@ textarea {
     font-size: 16px;
     cursor: pointer;
   }
-
+  
   .btn-group .button:hover {
     background-color: #009688;
       border-radius: 5px;
   }
-
-textarea{
-  margin-left: 130px;
-  margin-top: 1px;
-  margin-right: 10px;  
-  background-color: #f1f1f1;
+  
 }
-
 
 
   
