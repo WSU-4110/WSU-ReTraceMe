@@ -9,17 +9,18 @@
 
         <Title>WSU ReTraceMe</Title>
 
-	<link rel="apple-touch-icon" sizes="180x180" href="favicon_package_v0.16/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="favicon_package_v0.16/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="favicon_package_v0.16/favicon-16x16.png">
-	<link rel="manifest" href="favicon_package_v0.16/site.webmanifest">
-	<link rel="mask-icon" href="favicon_package_v0.16/safari-pinned-tab.svg" color="#5bbad5">
-	<meta name="msapplication-TileColor" content="#da532c">
-	<meta name="theme-color" content="#ffffff">
+        <link rel="apple-touch-icon" sizes="180x180" href="favicon_package_v0.16/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon_package_v0.16/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon_package_v0.16/favicon-16x16.png">
+        <link rel="manifest" href="favicon_package_v0.16/site.webmanifest">
+        <link rel="mask-icon" href="favicon_package_v0.16/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
         
          <!-- Version 6.25 is up to date as of 10/09/2023 -->
         <link rel="stylesheet" type="text/css" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps.css" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
         <style>
             #map {
                 width: 100%;
@@ -27,29 +28,18 @@
                 position: absolute;
                 top: 0;
                 left: 0;
+                border-radius: 25px;
             }
-
-
         </style>
     </head>
     
     <body>
         <div id="mySidenav" class="sidenav">
-            <textarea id="consoleLog" name="consoleLog" rows="20" cols="50"></textarea>
+            <textarea id="consoleLog" name="consoleLog" rows="30" cols="50"></textarea>
             <div id="myDropdown" class="dropdown-content">
-                <a onclick="getUserLocation(startTrip);" href="#start-trip">Start Trip</a>
-                <a onclick="tripUtil.loopEnder();" href="#start-trip">End Trip</a>
-                <a href="#show-console">Show Console</a>
-                <a href="#about">About</a>
+                <!---->
             </div>
         </div>
-
-        <span class="hamburger-menu" onclick="toggleNav()">
-            <span></span>
-            <span></span>
-            <span></span>
-        </span>
-
 
 
         <div id="map" class="map"></div>
@@ -58,12 +48,25 @@
         <script src="functions.js"></script>
         <script src="map-setup.js"></script>
 
+        <div> <span class="material-symbols-outlined"
+                    style="cursor: pointer;
+                        font-size: 30px;
+                        display: inline-block; 
+                        margin-left: 10px;"
+                    onclick="toggleNav()">
+                            menu
+                </span>
+        </div>
+        
         <div id="banner" class="banner">
             <div id="banner-content">
                 <div class="btn-group">
-                    <button class="button"><a onclick="markerManager.removeMarker();" href="javascript:void(0);">Remove Waypoint</a></button>
-                    <button class="button"><a onclick="getUserLocation(function(userLocation) { markerManager.placeMarker(userLocation); })" href="javascript:void(0);">Add Waypoint</a></button>
-                    <button class="button"><a onclick="markerManager.removeAllMarkers();" href="javascript:void(0);">Remove All Waypoints</a></button>
+                    <button class="button" title="Start Trip"><a onclick="getUserLocation(startTrip);" href="#start-trip"><span class="material-symbols-outlined">near_me</span></a></button>
+                    <button class="button" title="End Trip"><a onclick="tripUtil.loopEnder();" href="#start-trip"><span class="material-symbols-outlined">near_me_disabled</span></a></button>
+                    <button class="button" title="Add Marker"><a onclick="getUserLocation(function(userLocation) { markerManager.placeMarker(userLocation); })" href="javascript:void(0);"><span class="material-symbols-outlined">add_location</span></a></button>
+                    <button class="button" title="Remove Marker"><a onclick="markerManager.removeMarker();" href="javascript:void(0);"><span class="material-symbols-outlined">wrong_location</span></a></button>
+                    <button class="button" title="Remove All Markers"><a onclick="markerManager.removeAllMarkers();" href="javascript:void(0);"><span class="material-symbols-outlined">location_off</span></a></button>
+                    <button class="button" title="Toggle Mode"><a onclick=""><span class="material-symbols-outlined" onclick="changeStyle();" href ="javascript:void(0);">toggle_on</span></a></button>
                 </div>
             </div>
         </div>
@@ -71,7 +74,7 @@
         <script>
             function toggleNav() {
                 var element = document.getElementById("mySidenav");
-                var hamburgerMenu = document.querySelector(".hamburger-menu");
+                var hamburgerMenu = document.querySelector(".material-symbols-outlined");
                 if (element.style.width == "600px") {
                     element.style.width = "0";
                     hamburgerMenu.classList.remove("active");
@@ -83,6 +86,4 @@
 
         </script>
     </body>
-
-
 </html>

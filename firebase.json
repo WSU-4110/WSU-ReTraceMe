@@ -5,6 +5,18 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "redirects": [
+      {
+        "source": "/index.html",
+        "destination": "/Uindex.html",
+        "type": 301
+      },
+      {
+        "source": "/",
+        "destination": "/Uindex.html",
+        "type": 301
+      }
     ]
   }
 }

@@ -1,12 +1,13 @@
+
 class MarkerFactory {
     constructor(markerManager) {
         this.markerManager = markerManager;
     }
 
-    createMarker(coords, timestamp, color) {
+    createMarker(coords, timestamp) {
         const markerManager = this.markerManager;
         const util = new Utility();
-        var marker = new tt.Marker({ timestamp: timestamp, color: color }).setLngLat(coords).addTo(map);
+        var marker = new tt.Marker({ timestamp: timestamp }).setLngLat(coords).addTo(map);
 
         markerManager.setMarkerPopup(marker, coords, timestamp);
 
@@ -16,39 +17,17 @@ class MarkerFactory {
     }
 }
 
-class consoleLog {
+class markerLog {
     static markerCount = 0;
-    static timestamp;
-
+    
     constructor() {
-        consoleLog.timestamp = new Date().toLocaleString();
+        const timestamp = new Date().toLocaleString();
+        markerLog.markerCount += 1;
+        this.log = `[${timestamp}]: Marker #${markerLog.markerCount} placed\n`;
     }
 
-    getStart() {
-        consoleLog.markerCount = 0;
-        document.getElementById("consoleLog").value = "";
-        document.getElementById("consoleLog").value += `[${consoleLog.timestamp}]: A trip has been started\n`;
-    }
-
-    getMarker() {
-        consoleLog.markerCount += 1;
-        document.getElementById("consoleLog").value += `[${consoleLog.timestamp}]: Marker #${consoleLog.markerCount} placed\n`;
-    }
-
-    getRemove() {
-        document.getElementById("consoleLog").value += `[${consoleLog.timestamp}]: Marker removed\n`;
-    }
-
-    getRemoveAll() {
-        document.getElementById("consoleLog").value += `[${consoleLog.timestamp}]: All markers removed\n`;
-    }
-
-    getEnd() {
-        document.getElementById("consoleLog").value += `[${consoleLog.timestamp}]: The trip has ended\n`;
-    }
-
-    getChange() {
-        document.getElementById("consoleLog").value += `[${consoleLog.timestamp}]: Toggled light/dark mode\n`;
+    getLog() {
+        document.getElementById("consoleLog").value += this.log;
     }
 }
 
@@ -60,16 +39,14 @@ class MarkerManager {
         this.lastMarkerTime = null;
     }
 
-    placeMarker(userLocation, color) {
-        let setColor = 'black'
-        setColor = color;
+    placeMarker(userLocation) {
         const timestamp = new Date().toLocaleString();
         const markerFactory = new MarkerFactory(this);
-        const newMarker = markerFactory.createMarker(userLocation, timestamp, setColor);
+        const newMarker = markerFactory.createMarker(userLocation, timestamp);
 
         //Display new marker in console log
-        const log = new consoleLog();
-        log.getMarker();
+        //const log = new markerLog();
+        //log.getLog();
 
         this.lastMarkerTime = Date.now();
         this.lastMarkerLocation = userLocation;
@@ -92,7 +69,7 @@ class MarkerManager {
             console.log("Distance traveled = " + distanceTraveled + " km");
             this.placeMarker(userLocation);
         }
-    } 
+    }
 
     shouldAutoPlace(distanceTraveled, timeElapsed, interval) {
         return (distanceTraveled > 3 && timeElapsed >= interval) || (distanceTraveled >= 10);
@@ -111,8 +88,8 @@ class MarkerManager {
             this.lastClickedMarker = null;
 
             //display removal in console log
-            const remove = new consoleLog();
-            remove.getRemove();
+            const timestamp = new Date().toLocaleString();
+            //document.getElementById("consoleLog").value += `[${timestamp}]: Marker removed\n`;
 
             //console.log("Marker removed at " + coords + " with timestamp: " + timestamp);
             console.log("Marker removed at " + coords);
@@ -125,8 +102,8 @@ class MarkerManager {
         }
 
         //display removal in console log
-        const removeAll = new consoleLog();
-        removeAll.getRemoveAll();
+        const timestamp = new Date().toLocaleString();
+        //document.getElementById("consoleLog").value += `[${timestamp}]: All markers removed\n`;
 
         console.log("All markers removed.")
     }
@@ -208,12 +185,14 @@ function retrieveLocalData(userLocation) {
 //TRIP FUNCTIONS
 async function startTrip(userLocation) {
     //display start trip in console log
-    const start = new consoleLog();
-    start.getStart();
+    markerLog.markerCount = 0;
+    document.getElementById("consoleLog").value = "";
+    const timestamp = new Date().toLocaleString();
+    document.getElementById("consoleLog").value += `[${timestamp}]: A trip has been started\n`;
 
     const interval = 1 * 1000; //1 second
 
-    markerManager.placeMarker(userLocation, 'green');
+    markerManager.placeMarker(userLocation);
 
     console.log("A trip has been started.");
 
@@ -223,13 +202,16 @@ async function startTrip(userLocation) {
     }
 
     tripUtil.endLoop = false;
-    getUserLocation(userLocation => markerManager.placeMarker(userLocation, 'red'));
+
     console.log("The trip has ended.");
 
     //display end trip in console log
-    const end = new consoleLog();
-    end.getEnd();
+    const timestamp2 = new Date().toLocaleString();
+    document.getElementById("consoleLog").value += `[${timestamp2}]: The trip has ended\n`;
+    
 }
 
 const markerManager = new MarkerManager();
 const tripUtil = new Utility();
+
+module.exports = { MarkerManager, MarkerFactory, Utility, MarkerUtility };
