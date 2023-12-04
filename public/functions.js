@@ -142,7 +142,20 @@ class MarkerManager {
     }
 
     setMarkerPopup(marker, coords, timestamp) {
-        const popup = new tt.Popup({ offset: 25 }).setHTML('Lng: ' + coords.lng + ' Lat: ' + coords.lat + '<br>Timestamp: ' + timestamp);
+        let markerNumber = consoleLog.markerCount+1;
+        const popup = new tt.Popup({ offset: 25 }).setHTML(
+            '<div style="font-size: 1em; text-align: center; margin: 0px">' +
+                '<div style="">' +
+                    '<b> [' + markerNumber + ']</b><br>' + 
+                    '------------------<br>' +
+                    '' + timestamp + '<br>' +
+                '</div>' +
+                '<div style="">' +
+                    'Lng: ' + coords.lng + '<br>' +
+                    'Lat: ' + coords.lat + '' +
+                '</div>' +
+            '</div>'
+        );
         marker.setPopup(popup);
     }
 
@@ -210,6 +223,7 @@ async function startTrip(userLocation) {
     //display start trip in console log
     const start = new consoleLog();
     start.getStart();
+    
 
     const interval = 1 * 1000; //1 second
 
