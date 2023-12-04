@@ -136,6 +136,10 @@ textarea{
     border-radius:50%;
     display: inline-block;
     visibility: hidden;
+    color: white;
+    text-align: left;
+    line-height: 8px;
+    font-size: 5px;
 }
 
 

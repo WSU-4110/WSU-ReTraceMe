@@ -195,10 +195,14 @@ async function startTrip(userLocation) {
     markerManager.placeMarker(userLocation);
 
     console.log("A trip has been started.");
+    // Initially hide the dot
+    var dot = document.getElementById('notificationDot');
+    dot.style.visibility = 'hidden';
 
     while (!(tripUtil.endLoop)) {
         await tripUtil.sleep(interval);
         getUserLocation(userLocation => markerManager.autoPlaceMarker(userLocation));
+        flashDot();
     }
 
     tripUtil.endLoop = false;
@@ -217,12 +221,14 @@ function requestNotifs() {
         }
     })
 }
+
+var count = 0; // Initial count value
 function flashDot() {
     var dot = document.getElementById('notificationDot');
-    dot.style.visibility = (dot.style.visibility === 'hidden') ? 'visible' : 'hidden';
+    dot.textContent = count; // Set the content of the dot to the current count
+    dot.style.visibility = 'visible';
+    count = (count + 1) ; // Increment count and keep it in the range [0, 9]
 }
-setInterval(flashDot,600);
-
 
 
 const markerManager = new MarkerManager();
