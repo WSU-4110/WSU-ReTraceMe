@@ -1,3 +1,4 @@
+let count = 0; // Initial count value
 class MarkerFactory {
     constructor(markerManager) {
         this.markerManager = markerManager;
@@ -51,7 +52,7 @@ class MarkerManager {
         this.lastMarkerLocation = userLocation;
 
         this.markerClickEvent(newMarker);
-
+        flashDot();
         console.log(`Marker placed at ${userLocation} with timestamp: ${timestamp}`);
     }
 
@@ -72,7 +73,7 @@ class MarkerManager {
 
     shouldAutoPlace(distanceTraveled, timeElapsed, interval) {
         return (distanceTraveled > 3 && timeElapsed >= interval) || (distanceTraveled >= 10);
-        flashDot();
+        //flashDot();
     }
 
     removeMarker() {
@@ -202,7 +203,7 @@ async function startTrip(userLocation) {
     while (!(tripUtil.endLoop)) {
         await tripUtil.sleep(interval);
         getUserLocation(userLocation => markerManager.autoPlaceMarker(userLocation));
-        flashDot();
+        //flashDot();
     }
 
     tripUtil.endLoop = false;
@@ -222,7 +223,6 @@ function requestNotifs() {
     })
 }
 
-var count = 0; // Initial count value
 function flashDot() {
     var dot = document.getElementById('notificationDot');
     dot.textContent = count; // Set the content of the dot to the current count
