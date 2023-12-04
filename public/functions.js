@@ -1,4 +1,4 @@
-let count = 0; // Initial count value
+let count = 1; // Initial count value
 class MarkerFactory {
     constructor(markerManager) {
         this.markerManager = markerManager;
