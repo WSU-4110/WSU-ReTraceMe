@@ -238,7 +238,6 @@ async function startTrip(userLocation) {
     while (!(tripUtil.endLoop)) {
         await tripUtil.sleep(interval);
         getUserLocation(userLocation => markerManager.autoPlaceMarker(userLocation));
-        //flashDot();
     }
 
     tripUtil.endLoop = false;
@@ -254,7 +253,7 @@ async function startTrip(userLocation) {
 
 function flashDot() {
     var dot = document.getElementById('notificationDot');
-    dot.textContent = consoleLog.markerCount; // Set the content of the dot to the current count
+   // dot.textContent = consoleLog.markerCount; // Set the content of the dot to the current count
     dot.style.visibility = 'visible';
 }
 document.addEventListener('DOMContentLoaded', function () {
@@ -273,12 +272,6 @@ document.addEventListener('DOMContentLoaded', function () {
         hideRedDot();
     });
 
-
-    // Function to reset the red dot counter
-    function resetRedDotCounter() {
-        const dot = document.getElementById('notificationDot');
-        dot.textContent = '0';
-    }
 
     // Function to hide the red dot
     function hideRedDot() {
