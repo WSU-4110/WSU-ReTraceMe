@@ -75,12 +75,22 @@
             function toggleNav() {
                 var element = document.getElementById("mySidenav");
                 var hamburgerMenu = document.querySelector(".material-symbols-outlined");
-                if (element.style.width == "600px") {
-                    element.style.width = "0";
-                    hamburgerMenu.classList.remove("active");
-                } else {
-                    element.style.width = "600px";
-                    hamburgerMenu.classList.add("active");
+                if (window.matchMedia("(max-width: 600px)").matches) {
+                    if (element.style.height == "600px") {
+                        element.style.height = "0";
+                        hamburgerMenu.classList.remove("active");
+                    } else {
+                        element.style.height = "600px";
+                        hamburgerMenu.classList.add("active");
+                    }
+                }else{
+                    if (element.style.width == "600px") {
+                        element.style.width = "0";
+                        hamburgerMenu.classList.remove("active");
+                    } else {
+                        element.style.width = "600px";
+                        hamburgerMenu.classList.add("active");
+                    }
                 }
             }
 
