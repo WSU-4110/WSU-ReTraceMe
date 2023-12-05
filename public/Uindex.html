@@ -17,7 +17,7 @@
             <div class="navbar">
                 <img src="images/reTraceMe.png" class="logo">
                 <ul>
-                    <li><a href ='#'>Privacy</a></li>
+                    <li><a href ='#' onclick="privacyAlert()">Privacy</a></li>
                     <li><a href ='#'>About</a></li>
                     <li><a href ='#'>Contact</a></li>
                 </ul>
@@ -30,6 +30,15 @@
                     <button type="button"><a href="UHome.html">ReTrace Your Steps</a></button>
                 </div>
             </div>
+            <script>
+                function privacyAlert(){
+                    alert("Welcome to Re:TraceMe! \n\nWe want to assure the privacy of our users. " +
+                        "We will not and do not collect user information and store on our database. This is a project based " +
+                        "on our course: CSC 4110: Software Development. We do not have a database that is cloud driven because that " +
+                        "would cost us money. We want to provide a free option to our users and project. " +
+                        "Thank you for using this webapp and for your comments on progress!");
+                }
+            </script>
         </div>
 
         <div id="tutorial">
