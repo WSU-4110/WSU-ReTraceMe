@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="UHome.css">
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <Title>WSU ReTraceMe</Title>
 
@@ -20,6 +20,7 @@
          <!-- Version 6.25 is up to date as of 10/09/2023 -->
         <link rel="stylesheet" type="text/css" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps.css" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha384-AzjwT0ZNRiVNf2LqXs5vPDx+no4w3pDZaerLrhLlqz8NY5/6z0H+87S1nuM/D" crossorigin="anonymous">
 
         <style>
             #map {
@@ -67,6 +68,9 @@
                     <button class="button" title="Remove Marker"><a onclick="markerManager.removeMarker();" href="javascript:void(0);"><span class="material-symbols-outlined">wrong_location</span></a></button>
                     <button class="button" title="Remove All Markers"><a onclick="markerManager.removeAllMarkers();" href="javascript:void(0);"><span class="material-symbols-outlined">location_off</span></a></button>
                     <button class="button" title="Toggle Mode"><a onclick=""><span class="material-symbols-outlined" onclick="changeStyle();" href ="javascript:void(0);">toggle_on</span></a></button>
+                    <button class="button" id="notifs" title="Notifications"><a onclick="requestNotifs()" href="javascript:void(0);"><span class="material-symbols-outlined">notifications <span class="dot" id="notificationDot">0</span></span></a></button>
+
+
                 </div>
             </div>
         </div>
@@ -75,12 +79,22 @@
             function toggleNav() {
                 var element = document.getElementById("mySidenav");
                 var hamburgerMenu = document.querySelector(".material-symbols-outlined");
-                if (element.style.width == "600px") {
-                    element.style.width = "0";
-                    hamburgerMenu.classList.remove("active");
-                } else {
-                    element.style.width = "600px";
-                    hamburgerMenu.classList.add("active");
+                if (window.matchMedia("(max-width: 600px)").matches) {
+                    if (element.style.height == "100%") {
+                        element.style.height = "0%";
+                        hamburgerMenu.classList.remove("active");
+                    } else {
+                        element.style.height = "100%";
+                        hamburgerMenu.classList.add("active");
+                    }
+                }else{
+                    if (element.style.width == "600px") {
+                        element.style.width = "0";
+                        hamburgerMenu.classList.remove("active");
+                    } else {
+                        element.style.width = "600px";
+                        hamburgerMenu.classList.add("active");
+                    }
                 }
             }
 
