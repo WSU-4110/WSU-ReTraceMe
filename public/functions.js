@@ -80,7 +80,7 @@ class MarkerManager {
     }
 
     autoPlaceMarker(userLocation) {
-        const interval = 10* 1000;
+        const interval = 30* 1000;
         const currentTime = Date.now();
         const initialTime = this.lastMarkerTime;
         const timeElapsed = currentTime - initialTime;
@@ -95,7 +95,7 @@ class MarkerManager {
     } 
 
     shouldAutoPlace(distanceTraveled, timeElapsed, interval) {
-        return (distanceTraveled > 3 && timeElapsed >= interval) || (distanceTraveled >= 10);
+        return (distanceTraveled > 3 && timeElapsed >= interval) || (distanceTraveled >= 60);
     }
 
     removeMarker() {
