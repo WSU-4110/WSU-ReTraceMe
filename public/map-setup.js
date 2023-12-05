@@ -40,7 +40,7 @@ var geoLocate = new tt.GeolocateControl({
     showAccuracyCircle: false
 });
 
-map.addControl(geoLocate);
+map.addControl(geoLocate,"bottom-right");
 
 map.on('load', function () {
     geoLocate.trigger();
