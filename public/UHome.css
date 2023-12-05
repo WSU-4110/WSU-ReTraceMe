@@ -111,6 +111,19 @@ textarea{
   background-color: #f1f1f1;
 }
 
+.dot {
+    height: 10px;
+    width: 10px;
+    margin-left: -20px;
+    background-color: red;
+    border-radius:50%;
+    display: inline-block;
+    visibility: hidden;
+    color: white;
+    text-align: left;
+    line-height: 8px;
+    font-size: 5px;
+}
 
 /*Mobile screeen*/
 @media screen and (max-width: 600px) {
@@ -144,7 +157,7 @@ textarea{
     background: transparent; 
     border: none;
     color: white;
-    padding: 10px 10px;
+    padding: 7px 7px;
     margin: 7px;
     margin-left: 4px;
     text-align: center;
@@ -195,7 +208,7 @@ textarea {
   bottom: 0;
   left: 0px;
   background-color: #000000;
-  opacity: 0.8;
+  opacity: 1;
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 130px;
