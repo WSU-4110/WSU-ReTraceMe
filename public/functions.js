@@ -250,19 +250,43 @@ async function startTrip(userLocation) {
     end.getEnd();
 }
 
-function requestNotifs() {
-    Notification.requestPermission().then(perm => {
-        if(perm == 'granted'){
-        }
-    })
-}
+
 
 function flashDot() {
     var dot = document.getElementById('notificationDot');
     dot.textContent = consoleLog.markerCount; // Set the content of the dot to the current count
     dot.style.visibility = 'visible';
-     // Increment count and keep it in the range [0, 9]
 }
+document.addEventListener('DOMContentLoaded', function () {
+    // ... Your existing code ...
+
+    // Add an event listener to reset the red dot counter when console log is clicked
+    const consoleLogTextArea = document.getElementById('consoleLog');
+    consoleLogTextArea.addEventListener('click', function () {
+        // Reset the red dot counter
+        resetRedDotCounter();
+    });
+
+    // Add an event listener to hide the red dot when the console log is closed
+    const menuIcon = document.getElementById('menuIcon');
+    menuIcon.addEventListener('click', function () {
+        hideRedDot();
+    });
+
+
+    // Function to reset the red dot counter
+    function resetRedDotCounter() {
+        const dot = document.getElementById('notificationDot');
+        dot.textContent = '0';
+    }
+
+    // Function to hide the red dot
+    function hideRedDot() {
+        const dot = document.getElementById('notificationDot');
+        dot.style.visibility = 'hidden';
+    }
+});
+
 
 
 const markerManager = new MarkerManager();
