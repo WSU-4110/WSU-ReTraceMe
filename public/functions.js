@@ -75,7 +75,7 @@ class MarkerManager {
         this.lastMarkerLocation = userLocation;
 
         this.markerClickEvent(newMarker);
-
+        flashDot();
         console.log(`Marker placed at ${userLocation} with timestamp: ${timestamp}`);
     }
 
@@ -228,12 +228,17 @@ async function startTrip(userLocation) {
     const interval = 1 * 1000; //1 second
 
     markerManager.placeMarker(userLocation, 'green');
+    flashDot();
 
     console.log("A trip has been started.");
+    // Initially hide the dot
+    var dot = document.getElementById('notificationDot');
+    dot.style.visibility = 'visible';
 
     while (!(tripUtil.endLoop)) {
         await tripUtil.sleep(interval);
         getUserLocation(userLocation => markerManager.autoPlaceMarker(userLocation));
+        //flashDot();
     }
 
     tripUtil.endLoop = false;
@@ -244,6 +249,21 @@ async function startTrip(userLocation) {
     const end = new consoleLog();
     end.getEnd();
 }
+
+function requestNotifs() {
+    Notification.requestPermission().then(perm => {
+        if(perm == 'granted'){
+        }
+    })
+}
+
+function flashDot() {
+    var dot = document.getElementById('notificationDot');
+    dot.textContent = consoleLog.markerCount; // Set the content of the dot to the current count
+    dot.style.visibility = 'visible';
+     // Increment count and keep it in the range [0, 9]
+}
+
 
 const markerManager = new MarkerManager();
 const tripUtil = new Utility();
