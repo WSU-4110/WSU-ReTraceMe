@@ -249,12 +249,18 @@ async function startTrip(userLocation) {
     end.getEnd();
 }
 
-
+function requestNotifs() {
+    Notification.requestPermission().then(perm => {
+        if(perm == 'granted'){
+        }
+    })
+}
 
 function flashDot() {
     var dot = document.getElementById('notificationDot');
     // dot.textContent = consoleLog.markerCount; // Set the content of the dot to the current count
     dot.style.visibility = 'visible';
+     // Increment count and keep it in the range [0, 9]
 }
 document.addEventListener('DOMContentLoaded', function () {
     // ... Your existing code ...
@@ -279,7 +285,6 @@ document.addEventListener('DOMContentLoaded', function () {
         dot.style.visibility = 'hidden';
     }
 });
-
 
 
 const markerManager = new MarkerManager();
