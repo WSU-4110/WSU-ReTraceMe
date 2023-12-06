@@ -106,7 +106,7 @@ div#banner-content {
   background: transparent;
   border: none;
   color: white;
-  padding: 10px 10px;
+  padding: 5px 5px;
   margin: 7px;
   margin-left: 4px;
   text-align: center;
@@ -151,8 +151,7 @@ textarea{
     left: 0;
     /*background-image: linear-gradient(#009688, #01645a, #1c3a37, #242928, black);*/
     background-image: linear-gradient(#000000, #000000);
-    height: 15%;
-    width: 100%;
+    height: 100%
   }
   div#banner-content {
     height: 300px;
@@ -164,13 +163,13 @@ textarea{
   .btn-group {
     display: flex;
     justify-content: space-around;
-    margin-top: 20px;
+    margin-top: 6px;
   }
   .btn-group .button {
     background: transparent;
     border: none;
     color: white;
-    padding: 7px 7px;
+    padding: 5px 6px;
     margin: 7px;
     margin-left: 4px;
     text-align: center;
@@ -211,7 +210,6 @@ textarea{
     margin-right: auto;
     background-color: #f1f1f1;
   }
-
   .sidenav {
     height: 0;
     width: 100%;
@@ -226,7 +224,6 @@ textarea{
     transition: 0.5s;
     padding-top: 130px;
   }
-
 }
 
 
