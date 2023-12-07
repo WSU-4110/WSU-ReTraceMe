@@ -92,7 +92,7 @@ class MarkerManager {
             console.log("Distance traveled = " + distanceTraveled + " km");
             this.placeMarker(userLocation);
         }
-    } 
+    }
 
     shouldAutoPlace(distanceTraveled, timeElapsed, interval) {
         return (distanceTraveled > 3 && timeElapsed >= interval) || (distanceTraveled >= 60);
@@ -107,7 +107,7 @@ class MarkerManager {
             //var timestamp = lastClickedMarker.getProperty('timestamp');
 
             this.deleteMarker(key, this.lastClickedMarker)
- 
+
             this.lastClickedMarker = null;
 
             //display removal in console log
@@ -145,15 +145,15 @@ class MarkerManager {
         let markerNumber = consoleLog.markerCount+1;
         const popup = new tt.Popup({ offset: 25 }).setHTML(
             '<div style="font-size: 1em; text-align: center; margin: 0px">' +
-                '<div style="">' +
-                    '<b> [' + markerNumber + ']</b><br>' + 
-                    '------------------<br>' +
-                    '' + timestamp + '<br>' +
-                '</div>' +
-                '<div style="">' +
-                    'Lng: ' + coords.lng + '<br>' +
-                    'Lat: ' + coords.lat + '' +
-                '</div>' +
+            '<div style="">' +
+            '<b> [' + markerNumber + ']</b><br>' +
+            '------------------<br>' +
+            '' + timestamp + '<br>' +
+            '</div>' +
+            '<div style="">' +
+            'Lng: ' + coords.lng + '<br>' +
+            'Lat: ' + coords.lat + '' +
+            '</div>' +
             '</div>'
         );
         marker.setPopup(popup);
@@ -223,7 +223,7 @@ async function startTrip(userLocation) {
     //display start trip in console log
     const start = new consoleLog();
     start.getStart();
-    
+
 
     const interval = 1 * 1000; //1 second
 
@@ -238,7 +238,6 @@ async function startTrip(userLocation) {
     while (!(tripUtil.endLoop)) {
         await tripUtil.sleep(interval);
         getUserLocation(userLocation => markerManager.autoPlaceMarker(userLocation));
-        //flashDot();
     }
 
     tripUtil.endLoop = false;
@@ -250,12 +249,18 @@ async function startTrip(userLocation) {
     end.getEnd();
 }
 
-
+function requestNotifs() {
+    Notification.requestPermission().then(perm => {
+        if(perm == 'granted'){
+        }
+    })
+}
 
 function flashDot() {
     var dot = document.getElementById('notificationDot');
-    dot.textContent = consoleLog.markerCount; // Set the content of the dot to the current count
+    // dot.textContent = consoleLog.markerCount; // Set the content of the dot to the current count
     dot.style.visibility = 'visible';
+     // Increment count and keep it in the range [0, 9]
 }
 document.addEventListener('DOMContentLoaded', function () {
     // ... Your existing code ...
@@ -274,19 +279,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
-    // Function to reset the red dot counter
-    function resetRedDotCounter() {
-        const dot = document.getElementById('notificationDot');
-        dot.textContent = '0';
-    }
-
     // Function to hide the red dot
     function hideRedDot() {
         const dot = document.getElementById('notificationDot');
         dot.style.visibility = 'hidden';
     }
 });
-
 
 
 const markerManager = new MarkerManager();
