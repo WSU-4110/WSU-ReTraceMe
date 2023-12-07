@@ -168,7 +168,7 @@ background-color: #f1f1f1;
   .btn-group {
     display: flex;
     justify-content: space-around;
-    margin-top: 20px;
+    margin-top: 6px;
   }
   .btn-group .button {
     background: transparent; 
