@@ -1,4 +1,4 @@
-"# WSU-ReTraceMe" 
+# "WSU-ReTraceMe" 
 ReTraceMe app is used to retrace your steps so you never get lost again!
 
 Group Members
